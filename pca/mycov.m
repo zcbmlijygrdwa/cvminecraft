@@ -17,6 +17,9 @@ function covs = mycov(data)
 
 %above generates m*m covariance matrix
 
+
+%another approach: remove mean, and cov = (1/(n-1))*(data' * data); %https://blog.csdn.net/hustqb/article/details/78394058
+
 numOfCategory = size(data,2);
 numOfData = size(data,1);
 %calculate mean for each category
@@ -32,7 +35,7 @@ for i = 1:numOfCategory
     for j = 1:numOfCategory
         sum = 0;
         for k = 1:numOfData
-            sum = sum + (data(k,i)-means(i))*(data(k,j)-means(j))
+            sum = sum + (data(k,i)-means(i))*(data(k,j)-means(j));
         end
         covs(i,j) = sum/(numOfData-1);
     end

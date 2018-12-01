@@ -12,4 +12,9 @@ data = [49 7 29
     20 26 21
     31 41 21];
 
+data(:,1) = data(:,1) - mean(data(:,1));
+data(:,2) = data(:,2) - mean(data(:,2));
+data(:,3) = data(:,3) - mean(data(:,3));
+
+
 
