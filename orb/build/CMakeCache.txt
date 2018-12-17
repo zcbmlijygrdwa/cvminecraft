@@ -166,12 +166,6 @@ CMAKE_STRIP:FILEPATH=/usr/bin/strip
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //Value Computed by CMake
-EssentialTest_BINARY_DIR:STATIC=/home/zhenyu/cvminecraft/orb/build
-
-//Value Computed by CMake
-EssentialTest_SOURCE_DIR:STATIC=/home/zhenyu/cvminecraft/orb
-
-//Value Computed by CMake
 test_BINARY_DIR:STATIC=/home/zhenyu/cvminecraft/orb/build
 
 //Value Computed by CMake
