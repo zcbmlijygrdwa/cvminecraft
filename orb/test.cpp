@@ -11,8 +11,8 @@ int main()
 {
     Mat img1, img2;
 
-    img1 = imread("/home/zhenyu/cvminecraft/orb/data/1.png",CV_LOAD_IMAGE_GRAYSCALE);
-    img2 = imread("/home/zhenyu/cvminecraft/orb/data/2.png",CV_LOAD_IMAGE_GRAYSCALE);
+    img1 = imread("../data/1.png",CV_LOAD_IMAGE_GRAYSCALE);
+    img2 = imread("../data/2.png",CV_LOAD_IMAGE_GRAYSCALE);
 
     if(!img1.data)
     {
