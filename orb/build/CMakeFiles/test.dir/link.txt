@@ -1,1 +1,1 @@
-/usr/bin/c++      CMakeFiles/test.dir/test.cpp.o  -o test  -L/usr/local/lib -rdynamic -lopencv_core -lopencv_calib3d -lopencv_imgproc -lopencv_features2d -lopencv_imgcodecs -lopencv_highgui -Wl,-rpath,/usr/local/lib 
+/usr/bin/c++      CMakeFiles/test.dir/test.cpp.o  -o test  -L/usr/local/lib -rdynamic -lopencv_core -lopencv_calib3d -lopencv_imgproc -lopencv_features2d -lopencv_imgcodecs -lopencv_highgui -lopencv_videoio -Wl,-rpath,/usr/local/lib 

@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = /home/zhenyu/cvminecraft/orb/build
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -77,6 +66,17 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -109,6 +109,19 @@ preinstall/fast:
 depend:
 	$(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
+
+#=============================================================================
+# Target rules for targets named test_webcam
+
+# Build rule for target.
+test_webcam: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_webcam
+.PHONY : test_webcam
+
+# fast build rule for target.
+test_webcam/fast:
+	$(MAKE) -f CMakeFiles/test_webcam.dir/build.make CMakeFiles/test_webcam.dir/build
+.PHONY : test_webcam/fast
 
 #=============================================================================
 # Target rules for targets named test
@@ -150,18 +163,49 @@ test.cpp.s:
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test.cpp.s
 .PHONY : test.cpp.s
 
+test_webcam.o: test_webcam.cpp.o
+
+.PHONY : test_webcam.o
+
+# target to build an object file
+test_webcam.cpp.o:
+	$(MAKE) -f CMakeFiles/test_webcam.dir/build.make CMakeFiles/test_webcam.dir/test_webcam.cpp.o
+.PHONY : test_webcam.cpp.o
+
+test_webcam.i: test_webcam.cpp.i
+
+.PHONY : test_webcam.i
+
+# target to preprocess a source file
+test_webcam.cpp.i:
+	$(MAKE) -f CMakeFiles/test_webcam.dir/build.make CMakeFiles/test_webcam.dir/test_webcam.cpp.i
+.PHONY : test_webcam.cpp.i
+
+test_webcam.s: test_webcam.cpp.s
+
+.PHONY : test_webcam.s
+
+# target to generate assembly for a file
+test_webcam.cpp.s:
+	$(MAKE) -f CMakeFiles/test_webcam.dir/build.make CMakeFiles/test_webcam.dir/test_webcam.cpp.s
+.PHONY : test_webcam.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... edit_cache"
+	@echo "... test_webcam"
 	@echo "... test"
 	@echo "... test.o"
 	@echo "... test.i"
 	@echo "... test.s"
+	@echo "... test_webcam.o"
+	@echo "... test_webcam.i"
+	@echo "... test_webcam.s"
 .PHONY : help
 
 

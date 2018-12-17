@@ -60,6 +60,43 @@ CMAKE_SOURCE_DIR = /home/zhenyu/cvminecraft/orb
 CMAKE_BINARY_DIR = /home/zhenyu/cvminecraft/orb/build
 
 #=============================================================================
+# Target rules for target CMakeFiles/test_webcam.dir
+
+# All Build rule for target.
+CMakeFiles/test_webcam.dir/all:
+	$(MAKE) -f CMakeFiles/test_webcam.dir/build.make CMakeFiles/test_webcam.dir/depend
+	$(MAKE) -f CMakeFiles/test_webcam.dir/build.make CMakeFiles/test_webcam.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/zhenyu/cvminecraft/orb/build/CMakeFiles --progress-num=3,4 "Built target test_webcam"
+.PHONY : CMakeFiles/test_webcam.dir/all
+
+# Include target in all.
+all: CMakeFiles/test_webcam.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/test_webcam.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/zhenyu/cvminecraft/orb/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/test_webcam.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/zhenyu/cvminecraft/orb/build/CMakeFiles 0
+.PHONY : CMakeFiles/test_webcam.dir/rule
+
+# Convenience name for target.
+test_webcam: CMakeFiles/test_webcam.dir/rule
+
+.PHONY : test_webcam
+
+# clean rule for target.
+CMakeFiles/test_webcam.dir/clean:
+	$(MAKE) -f CMakeFiles/test_webcam.dir/build.make CMakeFiles/test_webcam.dir/clean
+.PHONY : CMakeFiles/test_webcam.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/test_webcam.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/test.dir
 
 # All Build rule for target.

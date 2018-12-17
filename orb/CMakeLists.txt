@@ -18,6 +18,8 @@ opencv_imgproc
 opencv_features2d
 opencv_imgcodecs
 opencv_highgui
+opencv_videoio
 )
 
 add_executable(test test.cpp)
+add_executable(test_webcam test_webcam.cpp)

@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/test_webcam.dir/test_webcam.cpp.o  -o test_webcam  -L/usr/local/lib -rdynamic -lopencv_core -lopencv_calib3d -lopencv_imgproc -lopencv_features2d -lopencv_imgcodecs -lopencv_highgui -lopencv_videoio -Wl,-rpath,/usr/local/lib 
