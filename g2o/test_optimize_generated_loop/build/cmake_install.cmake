@@ -1,4 +1,4 @@
-# Install script for directory: /home/b7/cvminecraft/orb
+# Install script for directory: /home/b7/cvminecraft/g2o/test_optimize_generated_loop
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/b7/cvminecraft/orb/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/b7/cvminecraft/g2o/test_optimize_generated_loop/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

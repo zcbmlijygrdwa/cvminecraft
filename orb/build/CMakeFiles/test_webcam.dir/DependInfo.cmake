@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/zhenyu/cvminecraft/orb/test_webcam.cpp" "/home/zhenyu/cvminecraft/orb/build/CMakeFiles/test_webcam.dir/test_webcam.cpp.o"
+  "/home/b7/cvminecraft/orb/test_webcam.cpp" "/home/b7/cvminecraft/orb/build/CMakeFiles/test_webcam.dir/test_webcam.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

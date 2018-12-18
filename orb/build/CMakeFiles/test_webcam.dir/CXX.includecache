@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/zhenyu/cvminecraft/orb/test_webcam.cpp
+/home/b7/cvminecraft/orb/test_webcam.cpp
 opencv2/features2d/features2d.hpp
-/home/zhenyu/cvminecraft/orb/opencv2/features2d/features2d.hpp
+/home/b7/cvminecraft/orb/opencv2/features2d/features2d.hpp
 iostream
 -
 opencv2/core/core.hpp

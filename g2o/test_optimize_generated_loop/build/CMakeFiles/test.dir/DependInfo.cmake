@@ -4,13 +4,14 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/b7/cvminecraft/orb/test.cpp" "/home/b7/cvminecraft/orb/build/CMakeFiles/test.dir/test.cpp.o"
+  "/home/b7/cvminecraft/g2o/test_optimize_generated_loop/test.cpp" "/home/b7/cvminecraft/g2o/test_optimize_generated_loop/build/CMakeFiles/test.dir/test.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/usr/local/include"
+  "/usr/include/eigen3"
+  "/usr/include/suitesparse"
   )
 
 # Targets to which this target links.
