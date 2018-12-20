@@ -27,21 +27,10 @@ void pinHoleProj(Matrix3d K, vector<Eigen::Vector3d> points_3d,  vector<Eigen::V
     }
 }
 
-
-int main()
+Matrix3d projMat(double fx,double fy,double cx,double cy)
 {
 
-    Matrix3d rot = Matrix3d::Identity();
-
-    cout<<"rot = "<<endl<<rot<<endl;
-
-    Matrix3d K = Matrix3d::Zero(3,4);
-    cout<<"initial K = "<<endl<<K<<endl;
-
-    double fx = 250;
-    double fy = 250;
-    double cx = 100;
-    double cy = 100;
+    Matrix3d K = Matrix3d::Zero();
 
     K(0,0) = fx;
     K(1,1) = fy;
@@ -49,6 +38,24 @@ int main()
     K(1,2) = cy;
     K(2,2) = 1;
 
+
+    cout<<"after writting parameters, K = "<<endl<<K<<endl;
+
+    return K;
+
+}
+
+int main()
+{
+
+
+    double fx = 250;
+    double fy = 250;
+    double cx = 100;
+    double cy = 100;
+
+
+    Matrix3d K = projMat(fx,fy,cx,cy);
 
     cout<<"after writting parameters, K = "<<endl<<K<<endl;
 
