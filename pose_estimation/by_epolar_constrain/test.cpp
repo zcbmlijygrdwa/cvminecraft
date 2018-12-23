@@ -1,26 +1,30 @@
 #include <iostream>
 #include <Eigen/Core>
 #include <Eigen/Geometry>
+#include <opencv2/core/core.hpp>
+#include <opencv2/core/eigen.hpp>
+#include <opencv2/calib3d/calib3d.hpp>
 
 
 
 using namespace std;
 using namespace Eigen;
+using namespace cv;
 
-void pinHoleProj(Matrix3d K, Isometry3d T,vector<Eigen::Vector3d> points_3d,  vector<Eigen::Vector2d> &points_2d)
+void pinHoleProj(Matrix3d K, Isometry3d T,vector<Eigen::Vector3d> points_3d,  vector<Eigen::Vector2d> &points_2d1)
 {
-//T: transformation from camera coordinate system to world coordinate system
-//T: 3 X 4
+    //T: transformation from camera coordinate system to world coordinate system
+    //T: 3 X 4
 
 
-//isometry matrix: internally 4X4 but used as 3X3, homogeneous - nonhomogeneous conversion done internally
+    //isometry matrix: internally 4X4 but used as 3X3, homogeneous - nonhomogeneous conversion done internally
 
     Vector3d p(3);
     int points_size = points_3d.size();
     for(int i = 0; i<points_size;i++)
     {
         Vector3d P = points_3d[i];
-        
+
         //projection
         p = K*T*P;
 
@@ -28,12 +32,12 @@ void pinHoleProj(Matrix3d K, Isometry3d T,vector<Eigen::Vector3d> points_3d,  ve
 
         //normalization
         p = p/p(2);
-        
+
         //cout<<"p2 = "<<p<<endl;
 
         Vector2d pp(2);
         pp<<p(0),p(1);
-        points_2d.push_back(pp);
+        points_2d1.push_back(pp);
     }
 }
 
@@ -68,26 +72,49 @@ int main()
     Vector3d P(3);
     Vector3d p(3);
     vector<Eigen::Vector3d> points_3d;
-    vector<Eigen::Vector2d> points_2d;
+    vector<Eigen::Vector2d> points_2d1;
+    vector<Eigen::Vector2d> points_2d2;
 
     P<<1,1,1;
     points_3d.push_back(P);
 
-    P<<1,1,10;
+    P<<3,7,17;
     points_3d.push_back(P);
 
-    P<<1,1,100;
+    P<<6,14,130;
     points_3d.push_back(P);
 
-    P<<1,1,1000;
+    P<<1,5,10;
     points_3d.push_back(P);
+
+    P<<1,2,120;
+    points_3d.push_back(P);
+
+    P<<5,7,10;
+    points_3d.push_back(P);
+
+    P<<2,4,6;
+    points_3d.push_back(P);
+
+    P<<3,9,9;
+    points_3d.push_back(P);
+
+    P<<7,2,13;
+    points_3d.push_back(P);
+
+    for(int i = 0;i<120;i++)
+{
+    P<<i*3+2,(i-4)*3,i*i-4*i;
+    points_3d.push_back(P);
+
+}
 
     Isometry3d T = Isometry3d::Identity();
 
     Matrix3d rot_mat;
     rot_mat = AngleAxisd(0.0,Vector3d::UnitX())
-                        * AngleAxisd(0.0,Vector3d::UnitY())
-                        * AngleAxisd(0.0,Vector3d::UnitZ());
+        * AngleAxisd(0.0,Vector3d::UnitY())
+        * AngleAxisd(0.0,Vector3d::UnitZ());
     //cout<<"rot_mat created = "<<rot_mat<<endl;
 
     T.rotate(rot_mat);
@@ -100,13 +127,8 @@ int main()
     T.pretranslate(trans_mat);
 
     cout<<"T = "<<T.matrix()<<endl;
-    pinHoleProj(K,T,points_3d,points_2d);
+    pinHoleProj(K,T,points_3d,points_2d1);
 
-    cout<<"2d points = "<<endl;
-    for(auto pp:points_2d)
-    {
-        cout<<pp.transpose()<<endl;
-    }
 
 
     //for the 2nd transform
@@ -115,27 +137,63 @@ int main()
     T = Isometry3d::Identity();
 
     rot_mat = AngleAxisd(0.1,Vector3d::UnitX())
-                        * AngleAxisd(0.2,Vector3d::UnitY())
-                        * AngleAxisd(0.3,Vector3d::UnitZ());
+        * AngleAxisd(0.2,Vector3d::UnitY())
+        * AngleAxisd(0.3,Vector3d::UnitZ());
 
     T.rotate(rot_mat);
 
 
-    trans_mat<<0,0,0;
+    trans_mat<<1,2,3;
 
     T.pretranslate(trans_mat);
 
     cout<<"T = "<<T.matrix()<<endl;
-    pinHoleProj(K,T,points_3d,points_2d);
+    pinHoleProj(K,T,points_3d,points_2d2);
 
-    cout<<"2d points = "<<endl;
-    for(auto pp:points_2d)
+
+    cout<<"start to find essential matrix"<<endl;
+
+    //convert eigen point set to opencv point set type
+    vector<Point2d> points1;
+    vector<Point2d> points2;
+
+    for(auto pp:points_2d1)
     {
-        cout<<pp.transpose()<<endl;
+        Point2d tempP = Point2d(pp(0),pp(1));
+        points1.push_back(tempP);
     }
 
-    
+    for(auto pp:points_2d2)
+    {
+        Point2d tempP = Point2d(pp(0),pp(1));
+        points2.push_back(tempP);
+    }
 
+
+    Mat e_mat,mask;
+    e_mat = findEssentialMat(points1,points2,(fx+fy)*0.5,Point2d(cx,cy),RANSAC,0.999,1.0f,mask);    
+
+
+    cout<<"Essential matrix from opencv = "<<endl<<e_mat<<endl;
+
+    //start to recover pose based on essential matrix
+    cout<<"start to find recover pose"<<endl;
+    Mat R,t;
+
+    recoverPose(e_mat, points1, points2, R, t, (fx+fy)*0.5, Point2d(cx,cy), mask); 
+
+    Matrix3d rot_from_opencv;
+    Vector3d trans_from_opencv;
+    cv2eigen(R,rot_from_opencv);    
+    cv2eigen(t,trans_from_opencv);    
+
+    Vector3d recovered_rot;
+    recovered_rot = rot_from_opencv.eulerAngles(0,1,2);
+    cout<<"Pose from opencv, R = "<<recovered_rot.transpose()<<endl<<"t = "<<trans_from_opencv.transpose()<<endl;
+    //scale translation
+    trans_from_opencv = trans_from_opencv/trans_from_opencv(0);
+
+    cout<<"After rescal, pose from opencv, R = "<<recovered_rot.transpose()<<endl<<"t = "<<trans_from_opencv.transpose()<<endl;
     return -1;
 
 }
