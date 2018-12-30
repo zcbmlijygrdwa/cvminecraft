@@ -12,6 +12,8 @@ using namespace Eigen;
 Quaterniond E2Q(double roll, double pitch, double yaw)
 {
     Quaterniond q;
+
+    //the following step: quaternion = rotation matrix (conversion)
     q = AngleAxisd(roll,Vector3d::UnitX())
         *AngleAxisd(pitch,Vector3d::UnitY())
         *AngleAxisd(yaw,Vector3d::UnitZ());
