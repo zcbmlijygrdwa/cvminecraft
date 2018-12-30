@@ -209,33 +209,38 @@ int main()
     cout<<"K*T1 = "<<endl<<(K*T1).matrix().block(0,0,3,4)<<endl;
     cout<<"K*T2 = "<<endl<<(K*T2).matrix().block(0,0,3,4)<<endl;
 
+    Mat K_cv;
+    eigen2cv(K,K_cv);
+    cout<<"K_cv = "<<endl<<K_cv<<endl;
+    cout<<"R = "<<endl<<R<<endl;
+    cout<<"t = "<<endl<<t<<endl;
+
+    Mat T1_cv;
+    hconcat(Mat::eye(3, 3, CV_64F),Mat::zeros(3, 1, CV_64F),T1_cv);
+
+    Mat T2_cv;
+    hconcat(R,t/t.at<double>(0,0),T2_cv);
+
+    cout<<"T1_cv = "<<endl<<T1_cv<<endl;
+    cout<<"T2_cv = "<<endl<<T2_cv<<endl;
+
     Mat proj_cam_1;
     Mat proj_cam_2;
-
-    eigen2cv((MatrixXd)((K*T1).matrix().block(0,0,3,4)),proj_cam_1);
-    eigen2cv((MatrixXd)((K*T2).matrix().block(0,0,3,4)),proj_cam_2);
+    
+    proj_cam_1 = K_cv*T1_cv;
+    proj_cam_2 = K_cv*T2_cv;
 
     cout<<"proj_cam_1 = "<<endl<<proj_cam_1<<endl;
     cout<<"proj_cam_2 = "<<endl<<proj_cam_2<<endl;
-
-
     //call triangulatePoints from opencv
     Mat results = cv::Mat(1,points1.size(),CV_64FC4); 
     triangulatePoints(proj_cam_1,proj_cam_2,points1,points2,results);
     //transpose
     results = results.t();
-    
-    cout<<"results.size() = ["<<results.rows<<","<<results.cols<<"]"<<endl;
-    cout<<"results = "<<endl<<results.t()<<endl;
 
     MatrixXd results_eigen;
     cv2eigen(results,results_eigen);
 
-    
-    cout<<"1 results_eigen = "<<endl<<results_eigen<<endl;
-
-    cout<<"results_eigen.size() = ["<<results_eigen.rows()<<","<<results_eigen.cols()<<"]"<<endl;
-    //homogeneous to non-homogeneous
     for(int i = 0; i < results_eigen.rows() ; i++)
     {
         results_eigen.row(i) /= results_eigen(i,3);
