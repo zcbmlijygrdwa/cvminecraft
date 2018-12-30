@@ -233,11 +233,15 @@ int main()
     cout<<"proj_cam_1 = "<<endl<<proj_cam_1<<endl;
     cout<<"proj_cam_2 = "<<endl<<proj_cam_2<<endl;
     //call triangulatePoints from opencv
-    Mat results = cv::Mat(1,points1.size(),CV_64FC4); 
+    Mat results; 
     triangulatePoints(proj_cam_1,proj_cam_2,points1,points2,results);
+
     //transpose
     results = results.t();
 
+    cout<<"results = "<<endl<<results<<endl;
+    cout<<"results size = "<<results.rows<<","<<results.cols<<endl;
+    
     MatrixXd results_eigen;
     cv2eigen(results,results_eigen);
 
