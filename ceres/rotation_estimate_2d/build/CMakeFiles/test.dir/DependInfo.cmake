@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/zhenyu/cvminecraft/ceres/helloworld/test.cpp" "/home/zhenyu/cvminecraft/ceres/helloworld/build/CMakeFiles/test.dir/test.cpp.o"
+  "/home/zhenyu/cvminecraft/ceres/rotation_estimate_2d/test.cpp" "/home/zhenyu/cvminecraft/ceres/rotation_estimate_2d/build/CMakeFiles/test.dir/test.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
