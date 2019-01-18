@@ -14,8 +14,8 @@ Mat my_transform(Mat points_3d)
 {
 //float PI = 3.141592653;
 Quaternionf quat_rot;
-quat_rot = AngleAxisf(0.22,Vector3f::UnitX())
-        *AngleAxisf(0.44,Vector3f::UnitY())
+quat_rot = AngleAxisf(0.5,Vector3f::UnitX())
+        *AngleAxisf(0.,Vector3f::UnitY())
         *AngleAxisf(0.66,Vector3f::UnitZ());
 
 //cout<<"quat_rot.matrix() = "<<quat_rot.matrix()<<endl;
@@ -72,7 +72,7 @@ eigen2cv(transformed_points,output);
 //make sure the format is right
 output.convertTo(output, CV_64F);
 
-cout<<"output = "<<endl<<output<<endl;
+//cout<<"output = "<<endl<<output<<endl;
 
 return output;
 }
@@ -180,7 +180,7 @@ int main(int argc, char** argv)
     Mat points_3d = Mat::zeros(Size(10,3),CV_64F);
     prepare_3d_points(points_3d);
 
-    cout<<"points_3d = "<<endl<<points_3d<<endl;
+    //cout<<"points_3d = "<<endl<<points_3d<<endl;
 
     Mat points_3d_transformed = my_transform(points_3d);
 
@@ -204,8 +204,8 @@ int main(int argc, char** argv)
         points_3d_proj.at<double>(2,i) /= points_3d_proj.at<double>(2,i);
     }
 
-
-    cout<<"after normalization, points_3d_proj = "<<endl<<points_3d_proj<<endl;
+    cout<<"-------------------------"<<endl;
+    //cout<<"after normalization, points_3d_proj = "<<endl<<points_3d_proj<<endl;
     vector<Point2f> vec_points_2d = matToVec2(points_3d_proj);
     for(uint i = 0 ; i < vec_points_2d.size() ; i++)
     {
@@ -213,13 +213,16 @@ int main(int argc, char** argv)
     }
 
 
-    cout<<"----------------------------------------------------"<<endl;
+    cout<<"-------------------------"<<endl;
 
     //start to do solvePnp
     Mat rvec;
     Mat tvec;
     vector<float> distCoeffs;
     solvePnP(vec_points_3d,vec_points_2d,camera_intrisic_matrix,distCoeffs,rvec,tvec,false,CV_ITERATIVE);
+    
+    cout<<"//***** Results ******"<<endl;
+
     cout<<"CV_ITERATIVE"<<endl;
     cout<<"rvec = "<<rvec<<endl;
     cout<<"tvec = "<<tvec<<endl;
@@ -230,6 +233,7 @@ int main(int argc, char** argv)
     //cout<<"tvec = "<<tvec<<endl;
 
     solvePnP(vec_points_3d,vec_points_2d,camera_intrisic_matrix,distCoeffs,rvec,tvec,false,CV_EPNP);
+    cout<<"//********************"<<endl;
     cout<<"CV_EPNP"<<endl;
     cout<<"rvec = "<<rvec<<endl;
     cout<<"tvec = "<<tvec<<endl;
