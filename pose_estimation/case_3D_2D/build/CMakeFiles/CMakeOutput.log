@@ -552,3 +552,35 @@ make[1]: Leaving directory '/home/zhenyu/cvminecraft/pose_estimation/case_3D_2D/
     Feature record: CXX_FEATURE:0cxx_variable_templates
     Feature record: CXX_FEATURE:0cxx_variadic_macros
     Feature record: CXX_FEATURE:0cxx_variadic_templates
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: /home/zhenyu/cvminecraft/pose_estimation/case_3D_2D/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_5157b/fast"
+make[1]: Entering directory '/home/zhenyu/cvminecraft/pose_estimation/case_3D_2D/build/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTC_5157b.dir/build.make CMakeFiles/cmTC_5157b.dir/build
+make[2]: Entering directory '/home/zhenyu/cvminecraft/pose_estimation/case_3D_2D/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_5157b.dir/CheckIncludeFile.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_5157b.dir/CheckIncludeFile.c.o   -c /home/zhenyu/cvminecraft/pose_estimation/case_3D_2D/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_5157b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5157b.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_5157b.dir/CheckIncludeFile.c.o  -o cmTC_5157b -rdynamic 
+make[2]: Leaving directory '/home/zhenyu/cvminecraft/pose_estimation/case_3D_2D/build/CMakeFiles/CMakeTmp'
+make[1]: Leaving directory '/home/zhenyu/cvminecraft/pose_estimation/case_3D_2D/build/CMakeFiles/CMakeTmp'
+
+
+Determining if the function pthread_create exists in the pthread passed with the following output:
+Change Dir: /home/zhenyu/cvminecraft/pose_estimation/case_3D_2D/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_49043/fast"
+make[1]: Entering directory '/home/zhenyu/cvminecraft/pose_estimation/case_3D_2D/build/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTC_49043.dir/build.make CMakeFiles/cmTC_49043.dir/build
+make[2]: Entering directory '/home/zhenyu/cvminecraft/pose_estimation/case_3D_2D/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_49043.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_49043.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_49043
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_49043.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_49043.dir/CheckFunctionExists.c.o  -o cmTC_49043 -rdynamic -lpthread 
+make[2]: Leaving directory '/home/zhenyu/cvminecraft/pose_estimation/case_3D_2D/build/CMakeFiles/CMakeTmp'
+make[1]: Leaving directory '/home/zhenyu/cvminecraft/pose_estimation/case_3D_2D/build/CMakeFiles/CMakeTmp'
+
+

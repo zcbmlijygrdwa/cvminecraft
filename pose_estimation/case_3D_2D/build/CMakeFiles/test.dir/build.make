@@ -122,6 +122,7 @@ test: /usr/lib/x86_64-linux-gnu/libcolamd.so
 test: /usr/lib/x86_64-linux-gnu/libcamd.so
 test: /usr/lib/x86_64-linux-gnu/libccolamd.so
 test: /usr/lib/x86_64-linux-gnu/libsuitesparseconfig.so
+test: /usr/local/lib/libceres.a
 test: /opt/ros/kinetic/lib/x86_64-linux-gnu/libopencv_shape3.so.3.3.1
 test: /opt/ros/kinetic/lib/x86_64-linux-gnu/libopencv_photo3.so.3.3.1
 test: /opt/ros/kinetic/lib/x86_64-linux-gnu/libopencv_datasets3.so.3.3.1
@@ -141,6 +142,26 @@ test: /opt/ros/kinetic/lib/x86_64-linux-gnu/libopencv_imgcodecs3.so.3.3.1
 test: /opt/ros/kinetic/lib/x86_64-linux-gnu/libopencv_objdetect3.so.3.3.1
 test: /opt/ros/kinetic/lib/x86_64-linux-gnu/libopencv_imgproc3.so.3.3.1
 test: /opt/ros/kinetic/lib/x86_64-linux-gnu/libopencv_core3.so.3.3.1
+test: /usr/local/lib/libglog.a
+test: /usr/lib/x86_64-linux-gnu/libspqr.so
+test: /usr/lib/x86_64-linux-gnu/libtbbmalloc.so
+test: /usr/lib/x86_64-linux-gnu/libtbb.so
+test: /usr/lib/x86_64-linux-gnu/libcholmod.so
+test: /usr/lib/x86_64-linux-gnu/libamd.so
+test: /usr/lib/x86_64-linux-gnu/libcolamd.so
+test: /usr/lib/x86_64-linux-gnu/libcamd.so
+test: /usr/lib/x86_64-linux-gnu/libccolamd.so
+test: /usr/lib/liblapack.so
+test: /usr/lib/libf77blas.so
+test: /usr/lib/libatlas.so
+test: /usr/lib/x86_64-linux-gnu/librt.so
+test: /usr/lib/x86_64-linux-gnu/libcxsparse.so
+test: /usr/lib/liblapack.so
+test: /usr/lib/libf77blas.so
+test: /usr/lib/libatlas.so
+test: /usr/lib/x86_64-linux-gnu/librt.so
+test: /usr/lib/x86_64-linux-gnu/libcxsparse.so
+test: /usr/lib/x86_64-linux-gnu/libsuitesparseconfig.so
 test: CMakeFiles/test.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/zhenyu/cvminecraft/pose_estimation/case_3D_2D/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable test"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test.dir/link.txt --verbose=$(VERBOSE)
