@@ -11,6 +11,7 @@ In this project, Hildreth edge detection method was implemented with Matlab.
 
 All functions and scripts were implemented from scratch. Matlab Computer Vision Toolbos is not required.
 
+Either prog1(imagePath) or my_edge_detector(imagePath) can be the entry point to this project.
 
 ### References
 * **http://www.songho.ca/dsp/convolution/convolution2d_example.html**
@@ -29,6 +30,10 @@ All functions and scripts were implemented from scratch. Matlab Computer Vision 
 Launch Matlab and go to the directory that contains the project, and run:
 
 		imgs = my_edge_detector('path/to/imageFile.jpg')
+
+or
+
+        imgs = prog1('path/to/imageFile.jpg')
 
 The image will be processed with 5 different sigma values and results will be saved to "/output“ folder. 
 
