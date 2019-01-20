@@ -2,11 +2,13 @@
 
 
 Author: Zhenyu Yang
+
 Email: zhenyuyang@ucsb.edu
 
 The Marr– Hildreth calculation is a strategy for recognizing edges in images, that is, constant bends where there are stable and fast varieties in picture brilliance. The Marr– Hildreth edge identification technique is simple and works by convolving the picture with the Laplacian of the Gaussian capacity, or, as a quick estimation by the contrast of Gaussians. At that point, zero intersections are distinguished in the separated outcome to get the edges. The Laplacian-of-Gaussian picture administrator is now and then likewise alluded to as the Mexican cap wavelet because of its visual shape when flipped around. David Marr and Ellen C. Hildreth are two of the innovators.
 
 In this project, Hildreth edge detection method was implemented with Matlab.
+
 All functions and scripts were implemented from scratch. Matlab Computer Vision Toolbos is not required.
 
 
@@ -35,7 +37,9 @@ The output imgs is a cell array with each element as a edge detection output.
 
 # 2. Installation
 This project was developed with Matlab IDE. 
+
 Matlab is the only software needed to be installed to run this project.
+
 *No Computer Vision Toolbox is required.
 
 # 3 Project files
