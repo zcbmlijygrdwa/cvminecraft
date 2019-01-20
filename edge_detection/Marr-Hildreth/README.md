@@ -33,7 +33,7 @@ Launch Matlab and go to the directory that contains the project, and run:
 
 or
 
-        imgs = prog1('path/to/imageFile.jpg')
+	        imgs = prog1('path/to/imageFile.jpg')
 
 The image will be processed with 5 different sigma values and results will be saved to "/output“ folder. 
 
