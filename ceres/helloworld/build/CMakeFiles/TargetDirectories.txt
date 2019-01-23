@@ -1,3 +1,4 @@
-/home/zhenyu/cvminecraft/ceres/helloworld/build/CMakeFiles/edit_cache.dir
 /home/zhenyu/cvminecraft/ceres/helloworld/build/CMakeFiles/rebuild_cache.dir
+/home/zhenyu/cvminecraft/ceres/helloworld/build/CMakeFiles/edit_cache.dir
+/home/zhenyu/cvminecraft/ceres/helloworld/build/CMakeFiles/test_numeric.dir
 /home/zhenyu/cvminecraft/ceres/helloworld/build/CMakeFiles/test.dir

@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = /home/zhenyu/cvminecraft/ceres/helloworld/build
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -77,6 +66,17 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -109,6 +109,19 @@ preinstall/fast:
 depend:
 	$(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
+
+#=============================================================================
+# Target rules for targets named test_numeric
+
+# Build rule for target.
+test_numeric: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_numeric
+.PHONY : test_numeric
+
+# fast build rule for target.
+test_numeric/fast:
+	$(MAKE) -f CMakeFiles/test_numeric.dir/build.make CMakeFiles/test_numeric.dir/build
+.PHONY : test_numeric/fast
 
 #=============================================================================
 # Target rules for targets named test
@@ -150,18 +163,49 @@ test.cpp.s:
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test.cpp.s
 .PHONY : test.cpp.s
 
+test_numeric.o: test_numeric.cpp.o
+
+.PHONY : test_numeric.o
+
+# target to build an object file
+test_numeric.cpp.o:
+	$(MAKE) -f CMakeFiles/test_numeric.dir/build.make CMakeFiles/test_numeric.dir/test_numeric.cpp.o
+.PHONY : test_numeric.cpp.o
+
+test_numeric.i: test_numeric.cpp.i
+
+.PHONY : test_numeric.i
+
+# target to preprocess a source file
+test_numeric.cpp.i:
+	$(MAKE) -f CMakeFiles/test_numeric.dir/build.make CMakeFiles/test_numeric.dir/test_numeric.cpp.i
+.PHONY : test_numeric.cpp.i
+
+test_numeric.s: test_numeric.cpp.s
+
+.PHONY : test_numeric.s
+
+# target to generate assembly for a file
+test_numeric.cpp.s:
+	$(MAKE) -f CMakeFiles/test_numeric.dir/build.make CMakeFiles/test_numeric.dir/test_numeric.cpp.s
+.PHONY : test_numeric.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... edit_cache"
+	@echo "... test_numeric"
 	@echo "... test"
 	@echo "... test.o"
 	@echo "... test.i"
 	@echo "... test.s"
+	@echo "... test_numeric.o"
+	@echo "... test_numeric.i"
+	@echo "... test_numeric.s"
 .PHONY : help
 
 
