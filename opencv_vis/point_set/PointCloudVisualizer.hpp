@@ -51,8 +51,16 @@ class PointCloudVisualizer
 
         void commitPoints()
         {
+            point_count = points_buffer.size();
+
+            if(point_count==0)
+            {
+                return;
+            }
+
             if(colors_buffer.size()==points_buffer.size())
             {
+                std::cout<<"same color and point size."<<std::endl;
                 is_color_set = true;
                 colors.create(1, point_count, CV_8UC4);
                 for(int i = 0 ; i < point_count;i++)
@@ -80,7 +88,6 @@ class PointCloudVisualizer
                 data[i].z = points_buffer[i].z;
             }
             std::cout<<points_buffer.size()<<" of points commmited to pcv."<<std::endl;
-            point_count = points_buffer.size();
 
             points_buffer.clear();
             colors_buffer.clear();

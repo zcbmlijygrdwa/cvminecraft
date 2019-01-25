@@ -21,7 +21,8 @@ int main(int argn, char **argv)
         {
             for(int j = 0 ; j < 10 ; j++)
             {
-                pcv.addPoint(cv::Point3f(i,j,i+j));
+                //pcv.addPoint(cv::Point3f(i,j,i+j));
+                pcv.addColorPoint(cv::Point3f(i,j,i+j),i*i%255,3*j*5,i*j);
             }
         }
     
@@ -32,7 +33,7 @@ int main(int argn, char **argv)
         pcv.setSource("../../../data/ply/bunny.ply");
     }
     pcv.setCamPov(camera_pov);
-    pcv.randomColor();
+    //pcv.randomColor();
     pcv.setPointSize(5);
     pcv.show();
 
