@@ -1,0 +1,3 @@
+/home/zhenyu/cvminecraft/opencv_vis/point_set/build/CMakeFiles/edit_cache.dir
+/home/zhenyu/cvminecraft/opencv_vis/point_set/build/CMakeFiles/rebuild_cache.dir
+/home/zhenyu/cvminecraft/opencv_vis/point_set/build/CMakeFiles/test.dir
