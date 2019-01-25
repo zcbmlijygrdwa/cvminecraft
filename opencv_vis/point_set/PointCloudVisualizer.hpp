@@ -7,7 +7,7 @@
 class PointCloudVisualizer
 {
     public:
-        bool camera_pov = false;
+        bool camera_pov = true;
         cv::Mat cloud;
         cv::Vec3f cam_pos, cam_focal_point, cam_y_dir;
         std::vector<cv::Point3f> points_buffer;
