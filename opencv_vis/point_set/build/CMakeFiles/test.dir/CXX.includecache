@@ -6,13 +6,19 @@
 
 #IncludeRegexTransform: 
 
-/home/zhenyu/cvminecraft/opencv_vis/point_set/test.cpp
+/home/zhenyu/cvminecraft/opencv_vis/point_set/PointCloudVisualizer.hpp
 opencv2/viz.hpp
 -
 iostream
 -
 fstream
 -
+
+/home/zhenyu/cvminecraft/opencv_vis/point_set/test.cpp
+iostream
+-
+PointCloudVisualizer.hpp
+/home/zhenyu/cvminecraft/opencv_vis/point_set/PointCloudVisualizer.hpp
 
 /opt/ros/kinetic/include/opencv-3.3.1-dev/opencv/cxcore.h
 opencv2/core/core_c.h
