@@ -10,6 +10,7 @@ class PointCloudVisualizer
         bool camera_pov = false;
         cv::Mat cloud;
         cv::Vec3f cam_pos, cam_focal_point, cam_y_dir;
+        std::vector<cv::Point3f> points_buffer;
 
         PointCloudVisualizer()
         {
@@ -17,6 +18,27 @@ class PointCloudVisualizer
             cam_focal_point = cv::Vec3f(3.0f,3.0f,2.0f);
             cam_y_dir = cv::Vec3f(-1.0f,0.0f,0.0f);
 
+        }
+
+        template<class T>
+        void addPoint(T data)
+        {
+            points_buffer.push_back(cv::Point3f(data.x,data.y,data.z));
+        }
+
+
+        void commitPoints()
+        {
+            cloud.create(1, points_buffer.size(), CV_32FC3);
+            for(uint i = 0 ; i < points_buffer.size() ; i++)
+            {
+                cv::Point3f* data = cloud.ptr<cv::Point3f>();
+                data[i].x = points_buffer[i].x;
+                data[i].y = points_buffer[i].y;
+                data[i].z = points_buffer[i].z;
+            }
+            std::cout<<points_buffer.size()<<" of points commmited to pcv."<<std::endl;
+            points_buffer.clear();
         }
 
         void setSource(std::string filename)
