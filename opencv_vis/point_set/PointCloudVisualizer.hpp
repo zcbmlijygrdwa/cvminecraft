@@ -49,6 +49,13 @@ class PointCloudVisualizer
                 colors_buffer.push_back(cv::Point3f(r,g,b));        
             }
 
+        template<class T>
+            void addColorPoint(T x, T y, T z, int r, int g, int b)
+            {
+                points_buffer.push_back(cv::Point3f(x,y,z));
+                colors_buffer.push_back(cv::Point3f(r,g,b));        
+            }
+
         void commitPoints()
         {
             point_count = points_buffer.size();
