@@ -32,6 +32,8 @@ int main(int argn, char **argv)
         pcv.setSource("../../../data/ply/bunny.ply");
     }
     pcv.setCamPov(camera_pov);
+    pcv.randomColor();
+    pcv.setPointSize(5);
     pcv.show();
 
     return 0;
