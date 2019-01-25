@@ -39,6 +39,8 @@ int main()
 	imshow("rgb", colorImage);
 	imshow("depth", depth);
 
+    waitKey(0);
+
 	depth.convertTo(depth_flt, CV_32FC1, 1.f / 5000.f);
 	depth_flt.setTo(std::numeric_limits<float>::quiet_NaN(), depth == 0);
 	depth = depth_flt;
