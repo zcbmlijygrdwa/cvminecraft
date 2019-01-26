@@ -25,6 +25,12 @@ class PointCloudVisualizer
         cv::Affine3f cloud_pose_global;
         cv::Affine3f cam_pose;
 
+        void clearBuffers()
+        {
+            points_buffer.clear();
+            colors_buffer.clear(); 
+        }
+
         PointCloudVisualizer()
         {
             cam_pos = cv::Vec3f(3.0f,3.0f,3.0f);
@@ -36,7 +42,8 @@ class PointCloudVisualizer
             is_cloud_widget_set = false;
             camera_pov = true;
 
-            points_buffer.clear();
+            clearBuffers();            
+
             cloud_widget_ptr = NULL;
 
             point_size = 2;
@@ -64,6 +71,7 @@ class PointCloudVisualizer
             myWindow.setViewerPose(cam_pose);
 
         }
+
 
         template<class T>
             void setPoint(T data)
@@ -146,11 +154,9 @@ class PointCloudVisualizer
                 }
                 cloud_widget_ptr = new cv::viz::WCloud(cloud, cv::viz::Color::green());
             }
-                std::cout<<" | "<<points_buffer.size()<<" of points commmited to pcv."<<std::endl;
+            std::cout<<" | "<<points_buffer.size()<<" of points commmited to pcv."<<std::endl;
             cloud_widget_ptr->setRenderingProperty( cv::viz::POINT_SIZE, point_size);
 
-            points_buffer.clear();
-            colors_buffer.clear();
         }
 
 
@@ -171,8 +177,7 @@ class PointCloudVisualizer
 
         void loadFromSource(std::string filename)
         {
-            points_buffer.clear();
-            colors_buffer.clear(); 
+            clearBuffers();
 
             std::ifstream ifs(filename);
 
