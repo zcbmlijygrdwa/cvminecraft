@@ -1,3 +1,6 @@
+#ifndef SolvePnpCeres_h
+#define SolvePnpCeres_h
+
 #include <ceres/ceres.h>
 #include <ceres/rotation.h>
 
@@ -183,4 +186,4 @@ class SolvePnpCeres
             //std::cout<<"rot = "<<*rot<<std::endl;
         }
 };
-
+#endif
