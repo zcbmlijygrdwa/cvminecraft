@@ -82,8 +82,7 @@ int main(int argn, char **argv)
 
         for(int i = 0 ; i < 1000 ; i++)
         {
-            //pcv.myWindow.spinOnce(1000,true);
-            pcv.showOnce();
+            pcv.showOnce();  //display function needs to be called in main thread
             cout<<"refresh in main"<<endl;
         }    
     }
