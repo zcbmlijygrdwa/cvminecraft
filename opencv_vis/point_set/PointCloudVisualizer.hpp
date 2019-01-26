@@ -226,7 +226,7 @@ class PointCloudVisualizer
             myWindow.showWidget("my_pointcloud", *cloud_widget_ptr, cloud_pose_global);
             is_cloud_widget_set = true;
 
-            std::cout<<"myWindow = "<<(&myWindow)<<std::endl;
+            //std::cout<<"myWindow = "<<(&myWindow)<<std::endl;
 
             /// Start event loop.
             myWindow.spin();
