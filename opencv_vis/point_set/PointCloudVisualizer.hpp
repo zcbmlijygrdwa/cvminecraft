@@ -1,3 +1,7 @@
+#ifndef POINTCLOUDVISUALIZER
+#define POINTCLOUDVISUALIZER
+
+
 #include <opencv2/viz.hpp>
 #include <iostream>
 #include <fstream>
@@ -256,3 +260,6 @@ class PointCloudVisualizer
         }
 
 };
+
+
+#endif
