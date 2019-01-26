@@ -1,7 +1,41 @@
 #include <iostream>
 #include "PointCloudVisualizer.hpp"
+#include <thread>
+#include <chrono>
 
 using namespace std;
+
+
+void changeColor(PointCloudVisualizer* pcv)
+{
+
+    for(int it = 1 ; it < 1000; it++)
+    {
+        cout<<"it = "<<it<<endl;
+
+        vector<cv::Point3f> tPoints;
+        vector<cv::Point3f> tColors;
+
+        for(int i = 0 ; i < 10;i++)
+        {
+            for(int j = 0 ; j < 10 ; j++)
+            {
+                tPoints.push_back(cv::Point3f(i,j,it));
+                tColors.push_back(cv::Point3f((i*i*i)%255,3*j*5,(i*j)%it));
+            }
+        }
+
+        //pcv->setPoint(tPoints); 
+        pcv->setColorPoint(tPoints,tColors); 
+
+        pcv->commitPoints();
+
+        cout<<"data update in thread"<<endl;
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(300));
+    }
+    cout<<"changeColor end"<<endl;
+}
 
 int main(int argn, char **argv)
 {
@@ -25,17 +59,33 @@ int main(int argn, char **argv)
                 pcv.addColorPoint(cv::Point3f(i,j,i+j),i*i%255,3*j*5,i*j);
             }
         }
-    
-        pcv.commitPoints();
+
     }
     else
     {
-        pcv.setSource("../../../data/ply/bunny.ply");
+        pcv.loadFromSource("../../../data/ply/bunny.ply");
     }
+    pcv.commitPoints();
     pcv.setCamPov(camera_pov);
     //pcv.randomColor();
     pcv.setPointSize(5);
-    pcv.show();
 
+    if(false)
+    {
+        pcv.show();
+    }
+    else
+    {
+        std::thread my_thread(changeColor,&pcv);
+        my_thread.detach();
+        //my_thread.join();
+
+        for(int i = 0 ; i < 1000 ; i++)
+        {
+            //pcv.myWindow.spinOnce(1000,true);
+            pcv.showOnce();
+            cout<<"refresh in main"<<endl;
+        }    
+    }
     return 0;
 }
