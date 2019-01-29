@@ -1,0 +1,3 @@
+/home/elementary/cvminecraft/pointcloudregistration/build/CMakeFiles/rebuild_cache.dir
+/home/elementary/cvminecraft/pointcloudregistration/build/CMakeFiles/test.dir
+/home/elementary/cvminecraft/pointcloudregistration/build/CMakeFiles/edit_cache.dir
