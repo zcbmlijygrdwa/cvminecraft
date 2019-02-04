@@ -25,7 +25,7 @@ int main(int argc, char** argv)
     cdstP = cdst.clone();
     // Standard Hough Line Transform
     vector<Vec2f> lines; // will hold the results of the detection
-    HoughLines(dst, lines, 1, CV_PI/180, 150, 0, 0 ); // runs the actual detection
+    HoughLines(dst, lines, 1, CV_PI/180, 200, 0, 0 ); // runs the actual detection
     // Draw the lines
     for( size_t i = 0; i < lines.size(); i++ )
     {
