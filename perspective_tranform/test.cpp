@@ -51,6 +51,11 @@ int main(int argc, char** argv)
     imshow("Input",input);
     imshow("Output",output);
 
+    if(argc==3)
+    {
+        imwrite(argv[2],output);
+    }
+
     waitKey(0);
     return 0;
 }
