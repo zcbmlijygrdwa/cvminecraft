@@ -97,6 +97,43 @@ clean: CMakeFiles/test.dir/clean
 .PHONY : clean
 
 #=============================================================================
+# Target rules for target CMakeFiles/tool.dir
+
+# All Build rule for target.
+CMakeFiles/tool.dir/all:
+	$(MAKE) -f CMakeFiles/tool.dir/build.make CMakeFiles/tool.dir/depend
+	$(MAKE) -f CMakeFiles/tool.dir/build.make CMakeFiles/tool.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/zhenyu/cvminecraft/color_threshold/build/CMakeFiles --progress-num=3,4 "Built target tool"
+.PHONY : CMakeFiles/tool.dir/all
+
+# Include target in all.
+all: CMakeFiles/tool.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/tool.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/zhenyu/cvminecraft/color_threshold/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/tool.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/zhenyu/cvminecraft/color_threshold/build/CMakeFiles 0
+.PHONY : CMakeFiles/tool.dir/rule
+
+# Convenience name for target.
+tool: CMakeFiles/tool.dir/rule
+
+.PHONY : tool
+
+# clean rule for target.
+CMakeFiles/tool.dir/clean:
+	$(MAKE) -f CMakeFiles/tool.dir/build.make CMakeFiles/tool.dir/clean
+.PHONY : CMakeFiles/tool.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/tool.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
 # Special targets to cleanup operation of make.
 
 # Special rule to run CMake to check the build system integrity.

@@ -123,6 +123,19 @@ test/fast:
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
 .PHONY : test/fast
 
+#=============================================================================
+# Target rules for targets named tool
+
+# Build rule for target.
+tool: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tool
+.PHONY : tool
+
+# fast build rule for target.
+tool/fast:
+	$(MAKE) -f CMakeFiles/tool.dir/build.make CMakeFiles/tool.dir/build
+.PHONY : tool/fast
+
 test.o: test.cpp.o
 
 .PHONY : test.o
@@ -150,6 +163,33 @@ test.cpp.s:
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test.cpp.s
 .PHONY : test.cpp.s
 
+tool.o: tool.cpp.o
+
+.PHONY : tool.o
+
+# target to build an object file
+tool.cpp.o:
+	$(MAKE) -f CMakeFiles/tool.dir/build.make CMakeFiles/tool.dir/tool.cpp.o
+.PHONY : tool.cpp.o
+
+tool.i: tool.cpp.i
+
+.PHONY : tool.i
+
+# target to preprocess a source file
+tool.cpp.i:
+	$(MAKE) -f CMakeFiles/tool.dir/build.make CMakeFiles/tool.dir/tool.cpp.i
+.PHONY : tool.cpp.i
+
+tool.s: tool.cpp.s
+
+.PHONY : tool.s
+
+# target to generate assembly for a file
+tool.cpp.s:
+	$(MAKE) -f CMakeFiles/tool.dir/build.make CMakeFiles/tool.dir/tool.cpp.s
+.PHONY : tool.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -157,11 +197,15 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
-	@echo "... test"
 	@echo "... rebuild_cache"
+	@echo "... test"
+	@echo "... tool"
 	@echo "... test.o"
 	@echo "... test.i"
 	@echo "... test.s"
+	@echo "... tool.o"
+	@echo "... tool.i"
+	@echo "... tool.s"
 .PHONY : help
 
 
