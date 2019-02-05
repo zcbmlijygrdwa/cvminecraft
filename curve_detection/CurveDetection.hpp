@@ -170,7 +170,7 @@ class CurveDetection
                 {
                     locations.push_back(Point2d(int((startIdx+endIdx)/2),i));
                 }
-                cout<<"startIdx = "<<startIdx<<", endIdx = "<<endIdx<<endl;
+                //cout<<"startIdx = "<<startIdx<<", endIdx = "<<endIdx<<endl;
 
             }
 
