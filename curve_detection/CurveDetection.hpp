@@ -13,6 +13,7 @@ class CurveDetection
     public:
         Mat input, imgGrayscale,imgBinary;
         vector<Point2d> output;
+        vector<Point> locations;   // output, locations of non-zero pixels
 
         // 寻优参数x的初始值，为 {1,1,1}
 
@@ -127,12 +128,47 @@ class CurveDetection
         }
 
 
-        void solve()
+        void setLocations(vector<Point> in)
         {
-            vector<Point> locations;   // output, locations of non-zero pixels
+            locations.clear();
+            locations = in;
+            cout<<"locations set"<<endl;
+        }
 
+
+        void findLocations()
+        {
+            locations.clear();
             //find location of all non-zero pixels
-            cv::findNonZero(imgBinary, locations);
+
+            //find the mid point of the obj in each row, starting from the buttom
+            for(int i = imgBinary.rows-1;i>=0;i--)
+            {
+                int startIdx = -1;
+                int endIdx = -1;
+
+                for(int j = 0; j < imgBinary.cols;j++)
+                {
+                    if(imgBinary.at<uchar>(i,j)>100)
+                    {
+                        if(startIdx==-1)
+                        {
+                            startIdx = j;
+                        }
+                        else
+                        {
+                            endIdx = j;
+                        }
+                    }
+                }
+
+                if(startIdx>0&&endIdx>0&&(endIdx-startIdx>20))
+                {
+                    locations.push_back(Point2d(int((startIdx+endIdx)/2),i));
+                }
+                cout<<"startIdx = "<<startIdx<<", endIdx = "<<endIdx<<endl;
+
+            }
 
             cout<<"detected "<<locations.size()<<" non-zero points"<<endl;
 
@@ -142,6 +178,10 @@ class CurveDetection
                 return;
             }
 
+        }
+
+        void solve()
+        {
 
             for(uint i = 0 ; i < locations.size();i++)
             {
