@@ -14,14 +14,23 @@ int main(int argc, char** argv)
     const char* filename = argc >=2 ? argv[1] : default_file;
 
     //Input and Output Image;
-    Mat input, input2;
+    Mat input, input2,input3;
 
     //Load the image
     input = imread(filename, 1 );
 
+    // first convert the image to grayscale
+    cvtColor(input, input2, CV_RGB2GRAY);
+
+    // then adjust the threshold to actually make it binary
+    threshold(input2, input3, 100, 255, CV_THRESH_BINARY);
+
+
     CurveDetection cd;
 
-    cd.setInput(input);
+    //cd.setColorInput(input);
+    //cd.setGrayscaleInput(input2);
+    cd.setBinaryInput(input3);
     cd.solve();
     vector<Point2d> result = cd.getResult();
 

@@ -11,7 +11,7 @@ using namespace ceres;
 class CurveDetection
 {
     public:
-        Mat input, imgGrayscale;
+        Mat input, imgGrayscale,imgBinary;
         vector<Point2d> output;
 
         // 寻优参数x的初始值，为 {1,1,1}
@@ -80,34 +80,59 @@ class CurveDetection
             double y;
         };
 
-        void setInput(Mat& in)
+        void setColorInput(Mat& in)
         {
             input = in;
+            // first convert the image to grayscale
+            cvtColor(input, imgGrayscale, CV_RGB2GRAY);
+
+            // then adjust the threshold to actually make it binary
+            threshold(imgGrayscale, imgBinary, 100, 255, CV_THRESH_BINARY);
 
             x_max = 0;
-            x_min = input.rows;
+            x_min = imgBinary.rows;
 
             if(x_min==0)
             {
                 cout<<"zero row or column detected!!!"<<endl;
             }
+        }
 
+        void setGrayscaleInput(Mat& in)
+        {
+            imgGrayscale = in;
+
+            threshold(imgGrayscale, imgBinary, 100, 255, CV_THRESH_BINARY);
+
+            x_max = 0;
+            x_min = imgBinary.rows;
+
+            if(x_min==0)
+            {
+                cout<<"zero row or column detected!!!"<<endl;
+            }
+        }
+
+        void setBinaryInput(Mat& in)
+        {
+            imgBinary = in;
+
+            x_max = 0;
+            x_min = imgBinary.rows;
+
+            if(x_min==0)
+            {
+                cout<<"zero row or column detected!!!"<<endl;
+            }
         }
 
 
         void solve()
         {
-
-            // first convert the image to grayscale
-            cvtColor(input, imgGrayscale, CV_RGB2GRAY);
-
-            // then adjust the threshold to actually make it binary
-            threshold(imgGrayscale, imgGrayscale, 100, 255, CV_THRESH_BINARY);
-
             vector<Point> locations;   // output, locations of non-zero pixels
 
             //find location of all non-zero pixels
-            cv::findNonZero(imgGrayscale, locations);
+            cv::findNonZero(imgBinary, locations);
 
             cout<<"detected "<<locations.size()<<" non-zero points"<<endl;
 
@@ -148,8 +173,8 @@ class CurveDetection
             {
                 trow = uint(x[0]*i*i+x[1]*i+x[2]);
                 tcol = i;
-                //cout<<"tcol = "<<tcol<<", trow = "<<trow<<" ,input.cols = "<<input.cols<<", input.rows = "<<input.rows<<endl;
-                if(trow>=0 && tcol>=0 && tcol <input.cols && trow<input.rows)
+                //cout<<"tcol = "<<tcol<<", trow = "<<trow<<" ,imgBinary.cols = "<<imgBinary.cols<<", imgBinary.rows = "<<imgBinary.rows<<endl;
+                if(trow>=0 && tcol>=0 && tcol <imgBinary.cols && trow<imgBinary.rows)
                 {
                     output.push_back(Point2d(tcol,trow));
                 }
