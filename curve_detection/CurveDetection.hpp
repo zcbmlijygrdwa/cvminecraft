@@ -135,6 +135,10 @@ class CurveDetection
             cout<<"locations set"<<endl;
         }
 
+        vector<Point> getLocations()
+        {
+            return locations;
+        }
 
         void findLocations()
         {
@@ -162,7 +166,7 @@ class CurveDetection
                     }
                 }
 
-                if(startIdx>0&&endIdx>0&&(endIdx-startIdx>20))
+                if(startIdx>0&&endIdx>0&&(endIdx-startIdx>5))
                 {
                     locations.push_back(Point2d(int((startIdx+endIdx)/2),i));
                 }
@@ -182,6 +186,7 @@ class CurveDetection
 
         void solve()
         {
+            cout<<"solve for "<<locations.size()<<" non-zero points"<<endl;
 
             for(uint i = 0 ; i < locations.size();i++)
             {
