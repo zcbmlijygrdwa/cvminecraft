@@ -174,6 +174,10 @@ class CurveDetection
 
             }
 
+
+            
+            findNonZero(imgBinary,locations);
+
             cout<<"detected "<<locations.size()<<" non-zero points"<<endl;
 
             if(locations.size()==0)

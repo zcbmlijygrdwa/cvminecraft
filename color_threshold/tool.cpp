@@ -54,9 +54,11 @@ int main(int argc, char* argv[])
     createTrackbar("Low V", window_detection_name, &low_V, max_value, on_low_V_thresh_trackbar);
     createTrackbar("High V", window_detection_name, &high_V, max_value, on_high_V_thresh_trackbar);
     Mat frame, frame_HSV, frame_threshold;
+
+    frame = imread(filename,1);
+    cv::resize(frame, frame, cv::Size(), 0.75, 0.75);
     while (true) {
         //cap >> frame;
-        frame = imread(filename,1);
         if(frame.empty())
         {
             break;
