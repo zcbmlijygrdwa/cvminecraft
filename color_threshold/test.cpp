@@ -21,7 +21,7 @@ int main(int argc, char** argv)
 
     const int max_value = 255;
 
-    int low_H = 35;
+    int low_H = (35.0/100)*max_value;
     int high_H = (43.0/100)*max_value;
     
     int low_S = (40.0/100)*max_value;
