@@ -91,7 +91,7 @@ class CurveDetection
             threshold(imgGrayscale, imgBinary, 100, 255, CV_THRESH_BINARY);
 
             x_max = 0;
-            x_min = imgBinary.rows;
+            x_min = imgBinary.cols;
 
             if(x_min==0)
             {
@@ -106,7 +106,7 @@ class CurveDetection
             threshold(imgGrayscale, imgBinary, 100, 255, CV_THRESH_BINARY);
 
             x_max = 0;
-            x_min = imgBinary.rows;
+            x_min = imgBinary.cols;
 
             if(x_min==0)
             {
@@ -119,7 +119,7 @@ class CurveDetection
             imgBinary = in;
 
             x_max = 0;
-            x_min = imgBinary.rows;
+            x_min = imgBinary.cols;
 
             if(x_min==0)
             {
@@ -176,7 +176,7 @@ class CurveDetection
 
 
             
-            findNonZero(imgBinary,locations);
+            //findNonZero(imgBinary,locations);
 
             cout<<"detected "<<locations.size()<<" non-zero points"<<endl;
 
@@ -194,6 +194,7 @@ class CurveDetection
 
             for(uint i = 0 ; i < locations.size();i++)
             {
+                //cout<<"locations[i] = "<<locations[i]<<endl;
                 x_min = min(x_min,locations[i].x);
                 x_max = max(x_max,locations[i].x);
 
@@ -217,6 +218,7 @@ class CurveDetection
 
             int trow = 0;
             int tcol = 0;
+            //cout<<"x_min = "<<x_min<<" ,x_max = "<<x_max<<endl;
             //draw the resulted curve
             for(int i = x_min ;  i <=x_max ; i++)
             {
