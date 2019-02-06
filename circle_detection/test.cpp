@@ -9,7 +9,7 @@ using namespace std;
 int main(int argc, char** argv)
 {
 
-    const char* default_file = "../../data/image/circles.jpg";
+    const char* default_file = "../../data/image/apple.jpg";
     const char* filename = argc >=2 ? argv[1] : default_file;
 
     Mat src, gray;
@@ -28,18 +28,26 @@ int main(int argc, char** argv)
     HoughCircles( gray, circles, CV_HOUGH_GRADIENT, 1, minDist, 200, 55, 0, 0 );
 
     // Draw the circles detected
+    Mat circles_only(Size(src.cols,src.rows),src.type());
+    circles_only.setTo(Scalar(255,255,255));// fill with color
+    
     for( size_t i = 0; i < circles.size(); i++ )
     {
         Point center(cvRound(circles[i][0]), cvRound(circles[i][1]));
         int radius = cvRound(circles[i][2]);     
-        circle( src, center, 3, Scalar(0,255,0), -1, 8, 0 );// circle center     
-        circle( src, center, radius, Scalar(0,0,255), 3, 8, 0 );// circle outline
+        circle( src, center, 3, Scalar(89,206,88), -1, 8, 0 );// circle center     
+        circle( src, center, radius, Scalar(26,125,233), 3, 8, 0 );// circle outline
+        
+        circle( circles_only, center, radius, Scalar(0,0,0), 3, 8, 0 );// circle outline
         cout << "center : " << center << "\nradius : " << radius << endl;
     }
 
     // Show your results
     namedWindow( "Hough Circle Transform Demo", CV_WINDOW_AUTOSIZE );
     imshow( "Hough Circle Transform Demo", src );
+
+
+    imshow("circles_only",circles_only);
 
     waitKey(0);
     return 0;
