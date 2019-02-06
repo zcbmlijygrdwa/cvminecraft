@@ -24,8 +24,18 @@ int main(int argc, char** argv)
 
     int minDist = 20;   //Minimum distance between the centers of the detected circles. 
 
+    int param1 = 30;
+    int param2 = 50;
+
+    if(argc==5)
+{
+    minDist = atoi(argv[2]);
+    param1 = atoi(argv[3]);
+    param2 = atoi(argv[4]);
+}
+
     // Apply the Hough Transform to find the circles
-    HoughCircles( gray, circles, CV_HOUGH_GRADIENT, 1, minDist, 200, 55, 0, 0 );
+    HoughCircles( gray, circles, CV_HOUGH_GRADIENT, 1, minDist, param1, param2, 0, 0 );
 
     // Draw the circles detected
     Mat circles_only(Size(src.cols,src.rows),src.type());
