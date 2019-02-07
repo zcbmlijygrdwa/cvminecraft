@@ -1,3 +1,4 @@
 /home/b7/cvminecraft/image_difference/build/CMakeFiles/edit_cache.dir
 /home/b7/cvminecraft/image_difference/build/CMakeFiles/rebuild_cache.dir
+/home/b7/cvminecraft/image_difference/build/CMakeFiles/test_perspective.dir
 /home/b7/cvminecraft/image_difference/build/CMakeFiles/test.dir

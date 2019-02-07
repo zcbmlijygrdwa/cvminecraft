@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named test_perspective
+
+# Build rule for target.
+test_perspective: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_perspective
+.PHONY : test_perspective
+
+# fast build rule for target.
+test_perspective/fast:
+	$(MAKE) -f CMakeFiles/test_perspective.dir/build.make CMakeFiles/test_perspective.dir/build
+.PHONY : test_perspective/fast
+
+#=============================================================================
 # Target rules for targets named test
 
 # Build rule for target.
@@ -150,6 +163,33 @@ test.cpp.s:
 	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/test.cpp.s
 .PHONY : test.cpp.s
 
+test_perspective.o: test_perspective.cpp.o
+
+.PHONY : test_perspective.o
+
+# target to build an object file
+test_perspective.cpp.o:
+	$(MAKE) -f CMakeFiles/test_perspective.dir/build.make CMakeFiles/test_perspective.dir/test_perspective.cpp.o
+.PHONY : test_perspective.cpp.o
+
+test_perspective.i: test_perspective.cpp.i
+
+.PHONY : test_perspective.i
+
+# target to preprocess a source file
+test_perspective.cpp.i:
+	$(MAKE) -f CMakeFiles/test_perspective.dir/build.make CMakeFiles/test_perspective.dir/test_perspective.cpp.i
+.PHONY : test_perspective.cpp.i
+
+test_perspective.s: test_perspective.cpp.s
+
+.PHONY : test_perspective.s
+
+# target to generate assembly for a file
+test_perspective.cpp.s:
+	$(MAKE) -f CMakeFiles/test_perspective.dir/build.make CMakeFiles/test_perspective.dir/test_perspective.cpp.s
+.PHONY : test_perspective.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -158,10 +198,14 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... test_perspective"
 	@echo "... test"
 	@echo "... test.o"
 	@echo "... test.i"
 	@echo "... test.s"
+	@echo "... test_perspective.o"
+	@echo "... test_perspective.i"
+	@echo "... test_perspective.s"
 .PHONY : help
 
 
