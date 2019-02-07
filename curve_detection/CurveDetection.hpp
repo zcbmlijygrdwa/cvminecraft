@@ -46,13 +46,40 @@ class CurveDetection
             initial_x[0] = 1;
             initial_x[1] = 1;
             initial_x[2] = 1;
-            x[0] = 1;
-            x[1] = 1;
-            x[2] = 1;
+            x[0] = initial_x[0];
+            x[1] = initial_x[1];
+            x[2] = initial_x[2];
 
             options.linear_solver_type = ceres::DENSE_QR; //配置增量方程的解法
             //options.minimizer_progress_to_stdout = true;//输出到cout
+        }
 
+        CurveDetection(double& g0, double& g1, double& g2)
+        {
+            //initial guess
+            initial_x[0] = g0;
+            initial_x[1] = g1;
+            initial_x[2] = g2;
+            x[0] = initial_x[0];
+            x[1] = initial_x[1];
+            x[2] = initial_x[2];
+
+            options.linear_solver_type = ceres::DENSE_QR; //配置增量方程的解法
+            //options.minimizer_progress_to_stdout = true;//输出到cout
+        }
+        
+        CurveDetection(double* g)
+        {
+            //initial guess
+            initial_x[0] = g[0];
+            initial_x[1] = g[1];
+            initial_x[2] = g[2];
+            x[0] = initial_x[0];
+            x[1] = initial_x[1];
+            x[2] = initial_x[2];
+
+            options.linear_solver_type = ceres::DENSE_QR; //配置增量方程的解法
+            //options.minimizer_progress_to_stdout = true;//输出到cout
         }
 
         //第一部分：构建代价函数，重载（）符号，仿函数的小技巧
@@ -175,7 +202,7 @@ class CurveDetection
             }
 
 
-            
+
             //findNonZero(imgBinary,locations);
 
             cout<<"detected "<<locations.size()<<" non-zero points"<<endl;
@@ -232,6 +259,13 @@ class CurveDetection
             }
         }        
 
+
+        void getParams(double* g)
+        {
+            g[0] = x[0];
+            g[1] = x[1];
+            g[2] = x[2];
+        }
 
         vector<Point2d> getResult()
         {
