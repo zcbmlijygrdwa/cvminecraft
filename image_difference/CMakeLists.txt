@@ -27,3 +27,11 @@ target_link_libraries( test
     ${CERES_LIBRARIES}
     )
 
+add_executable( test_perspective test_perspective.cpp )
+target_link_libraries( test_perspective
+    ${OpenCV_LIBS}
+    g2o_core g2o_types_slam3d g2o_solver_csparse g2o_stuff g2o_csparse_extension g2o_types_sba
+    ${CHOLMOD_LIBRARIES}
+    ${CERES_LIBRARIES}
+    )
+
