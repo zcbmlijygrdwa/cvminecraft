@@ -1,0 +1,3 @@
+/home/b7/cvminecraft/pinhold_projection/build/CMakeFiles/edit_cache.dir
+/home/b7/cvminecraft/pinhold_projection/build/CMakeFiles/rebuild_cache.dir
+/home/b7/cvminecraft/pinhold_projection/build/CMakeFiles/test.dir
