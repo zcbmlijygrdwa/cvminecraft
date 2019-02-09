@@ -6,19 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/zhenyu/cvminecraft/curve_detection/CurveDetection.hpp
-opencv2/opencv.hpp
--
-ceres/ceres.h
--
-
 /home/zhenyu/cvminecraft/curve_detection/test.cpp
 opencv2/opencv.hpp
 -
 ceres/ceres.h
 -
-CurveDetection.hpp
-/home/zhenyu/cvminecraft/curve_detection/CurveDetection.hpp
 
 /usr/include/eigen3/Eigen/Cholesky
 Core

@@ -59,12 +59,12 @@ int main(int argc, char** argv)
     // then adjust the threshold to actually make it binary
     threshold(input, input, 100, 255, CV_THRESH_BINARY);
 
-    vector<Point> locations;   // output, locations of non-zero pixels
+    vector<Point2f> locations;   // output, locations of non-zero pixels
 
     //find location of all non-zero pixels
-    cv::findNonZero(input, locations);
+    //cv::findNonZero(input, locations);
 
-    cout<<"detected "<<locations.size()<<" non-zero points"<<endl;
+    //cout<<"detected "<<locations.size()<<" non-zero points"<<endl;
 
     // access pixel coordinates
     //Point pnt = locations[i];
@@ -74,7 +74,19 @@ int main(int argc, char** argv)
     //    cout<<"locations["<<i<<"] = "<<locations[i]<<endl;
     //}
 
+double xt[21]={0.00,0.056,0.112,0.168,0.224,0.280,0.336,0.392,0.448,0.504,0.560,0.616,0.672,0.728,0.784,0.84,0.896,0.952,0.1008,0.1064,1.12};
+double yt[21]={0.00,1.66,3.31,4.96,6.6,8.22,9.82,11.4,12.94,14.43,15.86,17.22,18.5,19.69,20.79,21.79,22.7,23.53,24.25,24.87,25.4};
+
+
+
+for(int i = 0 ; i < 21;i++)
+{
+    locations.push_back(Point2f( xt[i],yt[i]));
+}
+
     google::InitGoogleLogging(argv[0]);
+    cout<<"locations[0] = "<<locations[0]<<endl;
+    cout<<"locations[1] = "<<locations[1]<<endl;
 
     // 寻优参数x的初始值，为5
 
@@ -100,10 +112,10 @@ int main(int argc, char** argv)
 
     for(int i = 0 ; i < locations.size();i++)
     {
-        x_min = min(x_min,locations[i].x);
-        x_max = max(x_max,locations[i].x);
-        y_min = min(y_min,locations[i].y);
-        y_max = max(y_max,locations[i].y);
+        //x_min = min(x_min,locations[i].x);
+        //x_max = max(x_max,locations[i].x);
+        //y_min = min(y_min,locations[i].y);
+        //y_max = max(y_max,locations[i].y);
 
         //cout<<"locations["<<i<<"] = "<<locations[i]<<endl;
         CostFunction* cost_function = new NumericDiffCostFunction<CostFunctor, CENTRAL, 1, 3>(new CostFunctor(locations[i].x,locations[i].y)); //使用自动求导，将之前的代价函数结构体传入，第一个1是输出维度，即残差的维度，第二个1是输入维度，即>待寻优参数x的维度。
