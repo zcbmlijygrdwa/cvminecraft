@@ -1,1 +1,6 @@
 Using opencv projectPoints() function
+
+
+because R T is camera pose, need to inverse.
+
+roll, yaw, pitch: positive rotation direction:右手螺旋定则，大拇指指向轴向，四指环绕方向为正方向。

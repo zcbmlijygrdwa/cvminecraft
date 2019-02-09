@@ -71,29 +71,29 @@ int main(int argc, char** argv)
     objectPoints.push_back(Point3d(-0.33,1.0,0.0)); //table left upper
     objectPoints.push_back(Point3d(0.0,0.0,20.0)); //table left upper
 
-    cv::Mat tvec(3,1,cv::DataType<double>::type); // translation vector
-    tvec.at<double>(0) =-2;
-    tvec.at<double>(1) = 0;
-    tvec.at<double>(2) =10;
+    //cv::Mat tvec(3,1,cv::DataType<double>::type); // translation vector
+    //tvec.at<double>(0) =-2;
+    //tvec.at<double>(1) = 0;
+    //tvec.at<double>(2) =10;
 
     vector<float> theta;
-    //theta.push_back(-2.35519211553);
-    //theta.push_back(0.158035071418);
-    //theta.push_back(-1.76534038707);
+    theta.push_back(-2.35519211553);
+    theta.push_back(0.158035071418);
+    theta.push_back(-1.76534038707);
 
-    theta.push_back(-3.14);
-    theta.push_back(0.0);
-    theta.push_back(0.0);
+    //theta.push_back(-3.14);
+    //theta.push_back(0.0);
+    //theta.push_back(0.0);
 
     //cv::Mat rvec(3,1,cv::DataType<double>::type); // translation vector
     //rvec.at<double>(0) = 0.0;
     //rvec.at<double>(1) = 0.0;
     //rvec.at<double>(2) = 0.0; 
 
-    //cv::Mat tvec(3,1,cv::DataType<double>::type); // translation vector
-    //tvec.at<double>(0) = -0.468743786407;
-    //tvec.at<double>(1) = 0.516820722065;
-    //tvec.at<double>(2) = 0.654226632285;
+    cv::Mat tvec(3,1,cv::DataType<double>::type); // translation vector
+    tvec.at<double>(0) = -0.468743786407;
+    tvec.at<double>(1) = 0.516820722065;
+    tvec.at<double>(2) = 0.654226632285;
 
 
     cv::Mat rvec(3,1,cv::DataType<double>::type); // translation vector
@@ -105,6 +105,10 @@ int main(int argc, char** argv)
 
     Mat rot_mat = eulerAnglesToRotationMatrix(theta);
 
+
+    //because R T is camera pose, need to inverse
+    rot_mat = rot_mat.inv();
+    tvec = -tvec;
 
     cout<<"0rvec = "<<rvec<<endl;
     Mat r3;
