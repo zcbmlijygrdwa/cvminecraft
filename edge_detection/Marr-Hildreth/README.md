@@ -7,9 +7,9 @@ Email: zhenyuyang@ucsb.edu
 
 The Marr– Hildreth calculation is a strategy for recognizing edges in images, that is, constant bends where there are stable and fast varieties in picture brilliance. The Marr– Hildreth edge identification technique is simple and works by convolving the picture with the Laplacian of the Gaussian capacity, or, as a quick estimation by the contrast of Gaussians. At that point, zero intersections are distinguished in the separated outcome to get the edges. The Laplacian-of-Gaussian picture administrator is now and then likewise alluded to as the Mexican cap wavelet because of its visual shape when flipped around. David Marr and Ellen C. Hildreth are two of the innovators.
 
-In this project, Hildreth edge detection method was implemented with Matlab.
+In this project, the Hildreth edge detection method was implemented with Matlab.
 
-All functions and scripts were implemented from scratch. Matlab Computer Vision Toolbos is not required.
+All functions and scripts were implemented from scratch. Matlab Computer Vision Toolbox is not required.
 
 Either prog1(imagePath) or my_edge_detector(imagePath) can be the entry point to this project.
 
@@ -29,15 +29,15 @@ Either prog1(imagePath) or my_edge_detector(imagePath) can be the entry point to
 
 Launch Matlab and go to the directory that contains the project, and run:
 
-		imgs = my_edge_detector('path/to/imageFile.jpg')
+        imgs = my_edge_detector('path/to/imageFile.jpg')
 
 or
 
-	        imgs = prog1('path/to/imageFile.jpg')
+        imgs = prog1('path/to/imageFile.jpg')
 
-The image will be processed with 5 different sigma values and results will be saved to "/output“ folder. 
+The image will be processed with five different sigma values and results will be saved to "/output“ folder. 
 
-The output imgs is a cell array with each element as a edge detection output.
+The output imgs is a cell array with each element as an edge detection output.
 
 
 # 2. Installation
@@ -75,10 +75,10 @@ A demo program shows an example of using this project. Run:
 
         demo
 
-The demo program will start and takes "data/lena.jpg" as input, and generate output into the "output" foler. The demo program also show the outputs with imshow() function.
+The demo program will start and takes "data/lena.jpg" as input, and generate output into the "output" folder. The demo program also shows the outputs with the imshow() function.
 
 
-By default the project will use the 2D convolution function provided by matlab. To switch to using the 2D convolution function that I implemented, simply open my_edge_detector.m and change:
+By default, the project will use the 2D convolution function provided by Matlab. To switch to using the 2D convolution function that I implemented, open my_edge_detector.m and change:
 
         ifUseMyConv2 = false;
 
