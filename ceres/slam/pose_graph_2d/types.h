@@ -49,6 +49,11 @@ struct Pose2d {
   double y;
   double yaw_radians;
 
+
+  // 在g2o数据文件中，VERTEX_SE2　下有三个数据
+  // x, y and yaw_radians.
+  // 所以一个gragh结点也就具有这三个数据
+
   // The name of the data type in the g2o file format.
   static std::string name() {
     return "VERTEX_SE2";
@@ -62,6 +67,9 @@ std::istream& operator>>(std::istream& input, Pose2d& pose) {
   return input;
 }
 
+
+
+//边就是一种限制
 // The constraint between two vertices in the pose graph. The constraint is the
 // transformation from vertex id_begin to vertex id_end.
 struct Constraint2d {
@@ -71,6 +79,36 @@ struct Constraint2d {
   double x;
   double y;
   double yaw_radians;
+
+  // 在g2o数据文件中，VERTEX_SE2　下有2 + 3 + 6 = 11 个数据，分别为：
+
+  //  1) index_begin_node
+  //  2) index_end_node
+
+  //  3) x   //should mean delta x
+  //  4) y   //should mean delta x
+  //  5) yaw //should mean delta yaw
+
+  //  6) i1 or A
+  //  7) i2 or B
+  //  8) i3 or C
+  //  9) i5 or D
+  // 10) i6 or E
+  // 11) i9 or F
+   
+
+  // inverse of the covariance matrix 
+  // | i1 i2 i3 |
+  // | i4 i5 i6 |
+  // | i7 i8 i9 |
+
+  // or
+
+  // | A B C |
+  // | B D E |
+  // | C E F |
+   
+  // 所以一条gragh的边也就具有这些数据
 
   // The inverse of the covariance matrix for the measurement. The order of the
   // entries are x, y, and yaw.
