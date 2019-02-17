@@ -129,15 +129,36 @@ for type_j = 1:img_class_num % Stitch images (same class) in target path
         end
     end
     
+    dataSet_raw = dataSet;
     
-
-    for i = 1:num_of_img-1
-        img1 = dataSet{i}.img;
-        img2 = dataSet{i+1}.img;
+    dataSet_done = {dataSet_raw{1}};
+    dataSet_raw = {dataSet_raw{1:0},dataSet_raw{2:end}};
+    
+    while(size(dataSet_raw,1)>0)
+        img2 = dataSet_raw{1}.img;
         
-        [indexPairs, matchedPoints1,matchedPoints2 ] = tryMatch(dataSet{i}.features, dataSet{i+1}.features);
+        indexPairsMax = [];
+        matchedPoints1Max = [];
+        matchedPoints2Max = [];
+        img1Max = [];
+        idxMax = 0;
         
-        figure; showMatchedFeatures(img1,img2,matchedPoints1,matchedPoints2);
+        for i = 1:size(dataSet_done,2)
+            img1 = dataSet_done{i}.img;
+            [indexPairs, matchedPoints1,matchedPoints2 ] = tryMatch(dataSet{i}.features, dataSet{i+1}.features);
+            
+            if(size(indexPairsMax,1)==0 || size(indexPairs,1)>size(indexPairsMax,1))
+                indexPairsMax = indexPairs;
+                matchedPoints1Max = matchedPoints1;
+                matchedPoints2Max = matchedPoints2;
+                img1Max = img1;
+                idxMax = i;
+            end
+        end
+        dataSet_done{size(dataSet_done,2)+1} = dataSet_raw{i};
+        dataSet_raw = {dataSet_raw{1:i-1},dataSet_raw{i+1:end}};
+        
+        figure; showMatchedFeatures(img1Max,img2,matchedPoints1Max,matchedPoints2Max);
         legend('matched points 1','matched points 2');
         
         if(size(indexPairs,1)<20)
@@ -151,5 +172,7 @@ for type_j = 1:img_class_num % Stitch images (same class) in target path
         figure,imshow(img1_new,[])
         
         a = 1;
+        
+        
     end
 end

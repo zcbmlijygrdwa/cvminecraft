@@ -100,35 +100,19 @@ for type_j = 1:img_class_num % Stitch images (same class) in target path
     end
     
     
-    
     %get feature for each image
     features = [];
+    dataSet = cell(num_of_img,1);
     for i = 1:num_of_img
-        tempFeatures.points  = detectSURFFeatures(images{i});
-        [des,vpts] = extractFeatures(img1,points1);
+        dataSet{i}.img_c = images{i};
+        dataSet{i}.img = autoGray(images{i});
+        
+        tempFeatures.points  = detectSURFFeatures(dataSet{i}.img);
+        [des,vpts] = extractFeatures(dataSet{i}.img,tempFeatures.points);
         tempFeatures.des = des;
         
-        features(i) = tempFeatures;
+        dataSet{i}.features = tempFeatures;
     end
-    
-    
-    
-    %--------------------------------------------------------------------------
-    % To stitch images imported in proper sequence
-    % Determine stitch sequence------------------------------------------------
-    for i = 1:num_of_img
-        for j = i+1:num_of_img
-            
-        end
-    end
-    
-
-%Extract the features descriptors
-
-[f1,vpts1] = extractFeatures(img1,points1);
-[f2,vpts2] = extractFeatures(img2,points2);
-    end
-    
     
     
     img1_new = zeros(3000,8000);
@@ -145,25 +129,36 @@ for type_j = 1:img_class_num % Stitch images (same class) in target path
         end
     end
     
-
-    for i = 1:num_of_img-1
-        img1_c = images{i};
-        img2_c = images{i+1};
+    dataSet_raw = dataSet;
+    
+    dataSet_done = {dataSet_raw{1}};
+    dataSet_raw = {dataSet_raw{1:0},dataSet_raw{2:end}};
+    
+    while(size(dataSet_raw,1)>0)
+    img2 = dataSet_raw{1}.img;
+    
+    indexPairsMax = [];
+    matchedPoints1Max = [];
+    matchedPoints2Max = [];
+    img1Max = [];
+    idxMax = 0;
+    
+    for i = 1:size(dataSet_done,2)
+        img1 = dataSet_done{i}.img;
+        [indexPairs, matchedPoints1,matchedPoints2 ] = tryMatch(dataSet{i}.features, dataSet{i+1}.features);
         
-        
-        if size(img1_c, 3) > 1
-            img1 = rgb2gray(img1_c);
+        if(size(indexPairsMax,1)==0 || size(indexPairs,1)>size(indexPairsMax,1))
+            indexPairsMax = indexPairs;
+            matchedPoints1Max = matchedPoints1;
+            matchedPoints2Max = matchedPoints2;
+            img1Max = img1;
+            idxMax = i;
         end
-        
-        if size(img2_c, 3) > 1
-            img2 = rgb2gray(img2_c);
-        end
-        
-        
-        [ indexPairs, matchedPoints1,matchedPoints2 ] = tryMatch( img1, img2);
-        
-        
-        figure; showMatchedFeatures(img1,img2,matchedPoints1,matchedPoints2);
+    end
+    
+    dataSet_raw = {dataSet_raw{1:i-1},dataSet_raw{i+1:end}};
+    
+        figure; showMatchedFeatures(img1Max,img2,matchedPoints1Max,matchedPoints2Max);
         legend('matched points 1','matched points 2');
         
         if(size(indexPairs,1)<20)
@@ -177,5 +172,7 @@ for type_j = 1:img_class_num % Stitch images (same class) in target path
         figure,imshow(img1_new,[])
         
         a = 1;
+    
+    
     end
 end
