@@ -132,6 +132,7 @@ for type_j = 1:img_class_num % Stitch images (same class) in target path
     dataSet_raw = dataSet;
     
     dataSet_done = {dataSet_raw{1}};
+    dataSet_done{1}.homo_global = eye(3);
     dataSet_raw = {dataSet_raw{1:0},dataSet_raw{2:end}};
     
     while(size(dataSet_raw,1)>0)
@@ -140,37 +141,36 @@ for type_j = 1:img_class_num % Stitch images (same class) in target path
         indexPairsMax = [];
         matchedPoints1Max = [];
         matchedPoints2Max = [];
-        img1Max = [];
         idxMax = 0;
         
         for i = 1:size(dataSet_done,2)
-            img1 = dataSet_done{i}.img;
-            [indexPairs, matchedPoints1,matchedPoints2 ] = tryMatch(dataSet{i}.features, dataSet{i+1}.features);
+            
+            [indexPairs, matchedPoints1,matchedPoints2 ] = tryMatch(dataSet_done{i}.features, dataSet_raw{1}.features);
             
             if(size(indexPairsMax,1)==0 || size(indexPairs,1)>size(indexPairsMax,1))
                 indexPairsMax = indexPairs;
                 matchedPoints1Max = matchedPoints1;
                 matchedPoints2Max = matchedPoints2;
-                img1Max = img1;
                 idxMax = i;
             end
         end
-        dataSet_done{size(dataSet_done,2)+1} = dataSet_raw{i};
-        dataSet_raw = {dataSet_raw{1:i-1},dataSet_raw{i+1:end}};
+        date_curr = dataSet_done{idxMax};
+        dataSet_raw = {dataSet_raw{:,2:end}};
         
-        figure; showMatchedFeatures(img1Max,img2,matchedPoints1Max,matchedPoints2Max);
+        figure; showMatchedFeatures(dataSet_done{idxMax}.img,img2,matchedPoints1Max,matchedPoints2Max);
         legend('matched points 1','matched points 2');
         
         if(size(indexPairs,1)<20)
             continue;
         end
         
-        homo = myRansac(indexPairs,matchedPoints1,matchedPoints2,100);
-        homo_global = homo*homo_global;
+        homo = myRansac(indexPairsMax,matchedPoints1Max,matchedPoints2Max,100);
+        homo_global = homo*dataSet_done{idxMax}.homo_global;
         img1_new = projection(homo_global,img1_new,img2);
         
+        date_curr.homo_global = homo_global;
         figure,imshow(img1_new,[])
-        
+        dataSet_done{size(dataSet_done,2)+1} = date_curr;
         a = 1;
         
         
