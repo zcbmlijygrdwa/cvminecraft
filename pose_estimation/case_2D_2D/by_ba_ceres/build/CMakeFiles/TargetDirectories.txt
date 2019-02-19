@@ -1,0 +1,3 @@
+/home/zhenyu/cvminecraft/pose_estimation/case_2D_2D/by_ba_ceres/build/CMakeFiles/edit_cache.dir
+/home/zhenyu/cvminecraft/pose_estimation/case_2D_2D/by_ba_ceres/build/CMakeFiles/test.dir
+/home/zhenyu/cvminecraft/pose_estimation/case_2D_2D/by_ba_ceres/build/CMakeFiles/rebuild_cache.dir
