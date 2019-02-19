@@ -4,15 +4,15 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/zhenyu/cvminecraft/pose_estimation/by_epolar_constrain/test.cpp" "/home/zhenyu/cvminecraft/pose_estimation/by_epolar_constrain/build/CMakeFiles/test.dir/test.cpp.o"
+  "/home/zhenyu/cvminecraft/pose_estimation/case_2D_2D/by_epolar_constrain/test.cpp" "/home/zhenyu/cvminecraft/pose_estimation/case_2D_2D/by_epolar_constrain/build/CMakeFiles/test.dir/test.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/include/eigen3"
-  "/opt/ros/kinetic/include/opencv-3.3.1-dev"
-  "/opt/ros/kinetic/include/opencv-3.3.1-dev/opencv"
+  "/usr/local/include/opencv"
+  "/usr/local/include"
   )
 
 # Targets to which this target links.

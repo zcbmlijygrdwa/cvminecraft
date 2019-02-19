@@ -238,6 +238,7 @@ CMakeFiles/test.dir/test.cpp.o
  /usr/local/include/ceres/numeric_diff_options.h
  /usr/local/include/ceres/ordered_groups.h
  /usr/local/include/ceres/problem.h
+ /usr/local/include/ceres/rotation.h
  /usr/local/include/ceres/sized_cost_function.h
  /usr/local/include/ceres/solver.h
  /usr/local/include/ceres/types.h

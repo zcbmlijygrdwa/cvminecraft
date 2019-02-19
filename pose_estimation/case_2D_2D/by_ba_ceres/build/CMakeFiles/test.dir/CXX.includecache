@@ -21,6 +21,8 @@ opencv2/calib3d/calib3d.hpp
 -
 ceres/ceres.h
 -
+ceres/rotation.h
+-
 
 /usr/include/eigen3/Eigen/Cholesky
 Core
@@ -1461,6 +1463,14 @@ glog/logging.h
 /usr/local/include/ceres/glog/logging.h
 ceres/internal/reenable_warnings.h
 /usr/local/include/ceres/ceres/internal/reenable_warnings.h
+
+/usr/local/include/ceres/rotation.h
+algorithm
+-
+cmath
+-
+limits
+-
 
 /usr/local/include/ceres/sized_cost_function.h
 ceres/cost_function.h

@@ -1,4 +1,4 @@
-# Install script for directory: /home/zhenyu/cvminecraft/pose_estimation/by_epolar_constrain
+# Install script for directory: /home/zhenyu/cvminecraft/pose_estimation/case_2D_2D/by_epolar_constrain
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/zhenyu/cvminecraft/pose_estimation/by_epolar_constrain/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/zhenyu/cvminecraft/pose_estimation/case_2D_2D/by_epolar_constrain/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

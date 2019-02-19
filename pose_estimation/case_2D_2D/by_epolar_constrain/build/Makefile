@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/zhenyu/cvminecraft/pose_estimation/by_epolar_constrain
+CMAKE_SOURCE_DIR = /home/zhenyu/cvminecraft/pose_estimation/case_2D_2D/by_epolar_constrain
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/zhenyu/cvminecraft/pose_estimation/by_epolar_constrain/build
+CMAKE_BINARY_DIR = /home/zhenyu/cvminecraft/pose_estimation/case_2D_2D/by_epolar_constrain/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/zhenyu/cvminecraft/pose_estimation/by_epolar_constrain/build/CMakeFiles /home/zhenyu/cvminecraft/pose_estimation/by_epolar_constrain/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/zhenyu/cvminecraft/pose_estimation/case_2D_2D/by_epolar_constrain/build/CMakeFiles /home/zhenyu/cvminecraft/pose_estimation/case_2D_2D/by_epolar_constrain/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/zhenyu/cvminecraft/pose_estimation/by_epolar_constrain/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/zhenyu/cvminecraft/pose_estimation/case_2D_2D/by_epolar_constrain/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -157,8 +157,8 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
-	@echo "... rebuild_cache"
 	@echo "... test"
+	@echo "... rebuild_cache"
 	@echo "... test.o"
 	@echo "... test.i"
 	@echo "... test.s"

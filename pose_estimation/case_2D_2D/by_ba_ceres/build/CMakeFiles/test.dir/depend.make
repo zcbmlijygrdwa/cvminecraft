@@ -237,6 +237,7 @@ CMakeFiles/test.dir/test.cpp.o: /usr/local/include/ceres/numeric_diff_cost_funct
 CMakeFiles/test.dir/test.cpp.o: /usr/local/include/ceres/numeric_diff_options.h
 CMakeFiles/test.dir/test.cpp.o: /usr/local/include/ceres/ordered_groups.h
 CMakeFiles/test.dir/test.cpp.o: /usr/local/include/ceres/problem.h
+CMakeFiles/test.dir/test.cpp.o: /usr/local/include/ceres/rotation.h
 CMakeFiles/test.dir/test.cpp.o: /usr/local/include/ceres/sized_cost_function.h
 CMakeFiles/test.dir/test.cpp.o: /usr/local/include/ceres/solver.h
 CMakeFiles/test.dir/test.cpp.o: /usr/local/include/ceres/types.h

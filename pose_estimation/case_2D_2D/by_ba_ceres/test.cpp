@@ -5,6 +5,7 @@
 #include <opencv2/core/eigen.hpp>
 #include <opencv2/calib3d/calib3d.hpp>
 #include<ceres/ceres.h>
+#include<ceres/rotation.h>
 
 
 
@@ -14,6 +15,8 @@ using namespace cv;
 
 
 //第一部分：构建代价函数，重载（）符号，仿函数的小技巧
+
+
 struct CostFunctor {
 
     CostFunctor(Point2d& point, Matrix3d& K)
@@ -48,7 +51,7 @@ struct CostFunctor {
         T1.pretranslate(Vector3d(cam_pos[3],cam_pos[4],cam_pos[5]));
         cout<<"T1 = \n"<<T1.matrix()<<endl;
 
-        T1 = T1.inverse();
+        //T1 = T1.inverse();
 
         Vector3d point(p_pos[0],p_pos[1],p_pos[2]);
         cout<<"point = \n"<<point<<endl;
@@ -127,7 +130,7 @@ int main()
 
 
     Matrix3d K = projMat(fx,fy,cx,cy);
-    
+
     cout<<"K = "<<endl<<K<<endl;
 
     Vector3d P(3);
@@ -185,9 +188,9 @@ int main()
 
     cout<<"T = "<<T.matrix()<<endl;
     //take inverse because need to transfer cam back and transfer points away
-    pinHoleProj(K,T.inverse(),points_3d,points_2d1);
-for(int i = 0 ; i < points_2d1.size() ; i++)
-    cout<<"points_2d1["<<i<<"] = "<<points_2d1[i]<<endl;
+    pinHoleProj(K,T,points_3d,points_2d1);
+    for(int i = 0 ; i < points_2d1.size() ; i++)
+        cout<<"points_2d1["<<i<<"] = "<<points_2d1[i]<<endl;
 
 
     //for the 2nd transform
@@ -209,7 +212,7 @@ for(int i = 0 ; i < points_2d1.size() ; i++)
     cout<<"T = "<<T.matrix()<<endl;
     cout<<"inv(T) = "<<T.inverse().matrix()<<endl;
     //take inverse because need to transfer cam back and transfer points away
-    pinHoleProj(K,T.inverse(),points_3d,points_2d2);
+    pinHoleProj(K,T,points_3d,points_2d2);
 
 
     cout<<"start to find essential matrix"<<endl;
@@ -234,46 +237,62 @@ for(int i = 0 ; i < points_2d1.size() ; i++)
     }
 
 
-    double* cam_pos = (double*)calloc(6,sizeof(double));
+    double* cam_pos1 = (double*)calloc(9,sizeof(double));
+    double* cam_pos2 = (double*)calloc(9,sizeof(double));
 
-    cam_pos[0] = 0.1;
-    cam_pos[1] = 0.2;
-    cam_pos[2] = 0.3;
-    cam_pos[3] = 1;
-    cam_pos[4] = 2;
-    cam_pos[5] = 3;
+    cam_pos1[0] = 0;
+    cam_pos1[1] = 0;
+    cam_pos1[2] = 0;
+    cam_pos1[3] = 0;
+    cam_pos1[4] = 0;
+    cam_pos1[5] = 0;
+
+    cam_pos2[0] = 0.1;
+    cam_pos2[1] = 0.2;
+    cam_pos2[2] = 0.3;
+    cam_pos2[3] = 1.0;
+    cam_pos2[4] = 2.0;
+    cam_pos2[5] = 3.0;
 
 
     double** p_pos_set = (double**)calloc(points1.size(),sizeof(double*));
 
-    ceres::Problem problem;
-    for (int i = 0; i < points_2d2.size(); i++) {
+    for (int i = 0; i < points_2d1.size(); i++) {
 
         p_pos_set[i] = (double*)calloc(3,sizeof(double));
-        //p_pos_set[i][0] = points1[i].x;
-        //p_pos_set[i][1] = points1[i].y;
-        //p_pos_set[i][2] = 1;    //assuming on the z = 1 plane
 
         // 由于深度不知道，只能把深度设置为1了
-    
-
         double z = 1;
         p_pos_set[i][0] = ( points1[i].x - cx ) * z / fx;
         p_pos_set[i][1] = ( points1[i].y - cy ) * z / fy;
         p_pos_set[i][2] = z;
 
-        //p_pos_set[i][0] = points_3d[i](0);
-        //p_pos_set[i][1] = points_3d[i](1);
-        //p_pos_set[i][2] = points_3d[i](2);
-        cout<<"points1["<<i<<"] = "<<points1[i]<<endl;
-        cout<<"p_pos_set[i] = "<<p_pos_set[i][0]<<" ,"<<p_pos_set[i][1]<<" ,"<<p_pos_set[i][2]<<endl;
+
+        //p_pos_set[i][0] = points_3d[i](0); 
+        //p_pos_set[i][1] = points_3d[i](1); 
+        //p_pos_set[i][2] = points_3d[i](2); 
+
+
+    }
+    ceres::Problem problem;
+
+    // 第一帧
+    for (int i = 0; i < points1.size(); i++) {
+
+        ceres::CostFunction* cost_function =
+            new ceres::NumericDiffCostFunction<CostFunctor,ceres::CENTRAL,2,3,6>(new CostFunctor(points1[i],K)); //使用自动求导，将之前的代价函数结构体传入，第一个1是输出维度，即残差的维度，第二个1是输入维度，即待寻优参数x的维度。
+        problem.AddResidualBlock(cost_function, NULL, p_pos_set[i],cam_pos1); //向问题中添加误差项，本问题比较简单，添加一个就行。
+
+    }
+    
+    // 第二帧
+    for (int i = 0; i < points2.size(); i++) {
 
         ceres::CostFunction* cost_function =
             new ceres::NumericDiffCostFunction<CostFunctor,ceres::CENTRAL,2,3,6>(new CostFunctor(points2[i],K)); //使用自动求导，将之前的代价函数结构体传入，第一个1是输出维度，即残差的维度，第二个1是输入维度，即待寻优参数x的维度。
-        problem.AddResidualBlock(cost_function, NULL, p_pos_set[i],cam_pos); //向问题中添加误差项，本问题比较简单，添加一个就行。
+        problem.AddResidualBlock(cost_function, NULL, p_pos_set[i],cam_pos2); //向问题中添加误差项，本问题比较简单，添加一个就行。
 
     }
-
     ceres::Solver::Options options;
     options.linear_solver_type = ceres::DENSE_SCHUR;
     options.minimizer_progress_to_stdout = true;
@@ -281,7 +300,9 @@ for(int i = 0 ; i < points_2d1.size() ; i++)
     ceres::Solve(options, &problem, &summary);
     std::cout << summary.FullReport() << "\n";
 
-    cout<<"cam_pos = "<<cam_pos[0]<<", "<<cam_pos[1]<<", "<<cam_pos[2]<<", "<<cam_pos[3]<<", "<<cam_pos[4]<<", "<<cam_pos[5]<<endl;
+    cout<<"cam_pos1 = "<<cam_pos1[0]<<", "<<cam_pos1[1]<<", "<<cam_pos1[2]<<", "<<cam_pos1[3]<<", "<<cam_pos1[4]<<", "<<cam_pos1[5]<<endl;
+
+    cout<<"cam_pos2 = "<<cam_pos2[0]<<", "<<cam_pos2[1]<<", "<<cam_pos2[2]<<", "<<cam_pos2[3]<<", "<<cam_pos2[4]<<", "<<cam_pos2[5]<<endl;
 
     return -1;
 
