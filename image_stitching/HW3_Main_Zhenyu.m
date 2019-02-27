@@ -150,6 +150,7 @@ for type_j = 1:img_class_num % Stitch images (same class) in target path
         
         data_curr.homo_global = homo_global;
         imshow(img1_new,[])
+        pause(0.01);
         dataSet_done{size(dataSet_done,2)+1} = data_curr;
         a = 1;
         end
