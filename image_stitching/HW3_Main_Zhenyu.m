@@ -1,11 +1,11 @@
 % Homework Assignment 3: Panorama Stitching
 % Zhenyu Yang
-
-%Data_path = 'GrandCanyon1/' % Stitching "GrandCanyon1"
-Data_path = 'GrandCanyon2/' % Stitching "GrandCanyon1"
-%Data_path = 'glacier4/' % Stitching "GrandCanyon1"
-Data_path = 'intersection/' % Stitching "GrandCanyon1"
-Data_path = 'family_house/' % Stitching "GrandCanyon1"
+function img1_new = HW3_Main_Zhenyu(Data_path)
+% %Data_path = 'GrandCanyon1/' % Stitching "GrandCanyon1"
+% Data_path = 'GrandCanyon2/' % Stitching "GrandCanyon1"
+% %Data_path = 'glacier4/' % Stitching "GrandCanyon1"
+% Data_path = 'intersection/' % Stitching "GrandCanyon1"
+% Data_path = 'family_house/' % Stitching "GrandCanyon1"
 Image_separator = '_';
 
 %==========================================================================
