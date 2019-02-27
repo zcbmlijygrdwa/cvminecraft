@@ -1,11 +1,8 @@
 % Homework Assignment 3: Panorama Stitching
 % Zhenyu Yang
 
-%Data_path = 'GrandCanyon1/' % Stitching "GrandCanyon1"
-Data_path = 'GrandCanyon2/' % Stitching "GrandCanyon1"
-%Data_path = 'glacier4/' % Stitching "GrandCanyon1"
-Data_path = 'intersection/' % Stitching "GrandCanyon1"
-Data_path = 'family_house/' % Stitching "GrandCanyon1"
+Data_path = 'GrandCanyon1/' % Stitching "GrandCanyon1"
+Data_path = 'glacier4/' % Stitching "GrandCanyon1"
 Image_separator = '_';
 
 %==========================================================================
@@ -80,7 +77,7 @@ for type_j = 1:img_class_num % Stitch images (same class) in target path
     end
     
     
-    img1_new = zeros(4000,8000);
+    img1_new = zeros(3000,8000);
     homo_global = eye(3);
     
     %draw the first image
@@ -119,23 +116,18 @@ for type_j = 1:img_class_num % Stitch images (same class) in target path
                 matchedPoints1Max = matchedPoints1;
                 matchedPoints2Max = matchedPoints2;
                 idxMax = i;
-%                         figure(2)
-%         subplot(1,2,1)
-%         imshow(dataSet_done{i}.img);
-%         subplot(1,2,2)
-%         imshow(img2);
             end
         end
-
+        
         
         %figure; showMatchedFeatures(dataSet_done{idxMax}.img,img2,matchedPoints1Max,matchedPoints2Max);
         %legend('matched points 1','matched points 2');
         
-        if(size(indexPairs,1)<15)
+        if(size(indexPairs,1)<20)
             pp = pp+1;
             continue;
         end
-        data_curr = dataSet_raw{pp};
+        data_curr = dataSet_done{idxMax};
         if(pp==1)
             dataSet_raw = {dataSet_raw{:,2:end}};
         elseif(pp==size(dataSet_raw,2))
