@@ -1,4 +1,4 @@
-function prog2(dir)
+function prog3(dir)
 %Data_path = 'GrandCanyon1/' % Stitching "GrandCanyon1"
 %Data_path = 'ucsb4/' % Stitching "GrandCanyon1"
 %Data_path = 'glacier4/' % Stitching "GrandCanyon1"
