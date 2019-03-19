@@ -1,14 +1,15 @@
 #ifndef DoubleLinkedList_HPP
 #define DoubleLinkedList_HPP
 
+template<class T>
 class DoubleLinkedList
 {
     public:
         int key;
-        int val;
+        T val;
         DoubleLinkedList *prev, *next;
 
-        DoubleLinkedList(int k, int v)
+        DoubleLinkedList(int k, T v)
         {
             key = k;
             val = v;

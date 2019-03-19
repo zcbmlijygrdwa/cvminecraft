@@ -7,11 +7,12 @@
 
 using namespace std;
 
+template<class T>
 class LRU
 {
     public:
-        DoubleLinkedList *head, *end, *myList;
-        map<int,DoubleLinkedList*> myMap;
+        DoubleLinkedList<T> *head, *end, *myList;
+        map<int,DoubleLinkedList<T>*> myMap;
         uint capacity;
         LRU(uint c)
         {
@@ -35,7 +36,7 @@ class LRU
                 return;
             else if(key==end->key)
             {
-                DoubleLinkedList* temp = end;
+                DoubleLinkedList<T>* temp = end;
                 end = end->prev;
 
                 head->prev = temp;
@@ -44,7 +45,7 @@ class LRU
             }
             else
             {
-                DoubleLinkedList* temp = myMap[key];
+                DoubleLinkedList<T>* temp = myMap[key];
 
                 if(temp->prev)
                     temp->prev->next = temp->next;
@@ -72,13 +73,13 @@ class LRU
         }
 
 
-        void put(int key, int value)
+        void put(int key, T value)
         {
             //check if empty
             if(myMap.size()==0)
             {
                 cout<<"init pushing: "<<value<<endl;
-                DoubleLinkedList* temp = new DoubleLinkedList(key, value);
+                DoubleLinkedList<T>* temp = new DoubleLinkedList<T>(key, value);
 
                 head = temp;
                 end = temp;
@@ -95,7 +96,7 @@ class LRU
                 else
                 {
                     cout<<"pushing: "<<value<<endl;
-                    DoubleLinkedList* temp = new DoubleLinkedList(key, value);
+                    DoubleLinkedList<T>* temp = new DoubleLinkedList<T>(key, value);
                     myMap[key] = temp;
 
                     temp->next = head;
