@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/zhenyu/cvminecraft/algos/lru/DoubleLinkedList.hpp
+
+/home/zhenyu/cvminecraft/algos/lru/LRU.hpp
+iostream
+-
+map
+-
+DoubleLinkedList.hpp
+/home/zhenyu/cvminecraft/algos/lru/DoubleLinkedList.hpp
+
+/home/zhenyu/cvminecraft/algos/lru/test.cpp
+iostream
+-
+LRU.hpp
+/home/zhenyu/cvminecraft/algos/lru/LRU.hpp
+
