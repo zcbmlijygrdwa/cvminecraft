@@ -8,7 +8,7 @@ myLocation.y = 0;
 myRadarLocation_prev = myLocation;
 
 lidar_noise_param.mu = 0;
-lidar_noise_param.sigma = 18.8;
+lidar_noise_param.sigma = 4.4;
 
 radar_noise_param.mu = 0;
 radar_noise_param.sigma = 0.05;
@@ -17,7 +17,7 @@ radar_noise_param.sigma = 0.05;
 d_t = 1;
 
 %kalman states: [px,py,vx,vy]
-X_curr = [0,0,0,0]';
+X_curr = [ 99.1391 , 111.5188,0.1,0.2]';
 X_next = X_curr;
 
 %state error covariance
@@ -34,15 +34,15 @@ Q = [1/4 0 1/2 0
      1/2 0 1 0
      0 1/2 0 1];
  
- Q = eye(4,4)*0.01;
+ Q = eye(4,4)*0.000001;
 
 %noise covariance of the sensors
 R_lidar = [lidar_noise_param.sigma*lidar_noise_param.sigma 0
             0 lidar_noise_param.sigma*lidar_noise_param.sigma];
         
-R_radar = [0.09 0 0
-              0 0.0009 0
-              0 0 0.09];
+R_radar = [radar_noise_param.sigma*radar_noise_param.sigma 0 0
+              0 radar_noise_param.sigma*radar_noise_param.sigma 0
+              0 0 radar_noise_param.sigma*radar_noise_param.sigma];
 
           
           
@@ -75,7 +75,7 @@ H_radar_jacobian = [px/(sqrt(px*px+py*py)) py/(sqrt(px*px+py*py)) 0 0
        
 
 
-sim_length = 500;
+sim_length = 1000;
 
 %loc_data = zeros(sim_length,1);
 
@@ -87,11 +87,11 @@ true_location_set = [];
 
 for i = 1:sim_length
 
-% myLocation.x = 6+5*cos(i/20);
-% myLocation.y = 6+5*sin(i/18);
+myLocation.x = 65+35*cos(i/250);
+myLocation.y = 114+50*sin(i/200);
 
-myLocation.x = i;
-myLocation.y = 2*i;
+% myLocation.x = i;
+% myLocation.y = 2*i;
 
 
 lidar_resp = lidar_response(myLocation,lidar_noise_param);
@@ -124,9 +124,6 @@ X_next = F*X_curr
 
 P_next = F*P_curr*F'+Q;
 
-temp_loc_data.kf_lidar_location.x = X_curr(1);
-temp_loc_data.kf_lidar_location.y = X_curr(2);
-kf_lidar_location_set = [kf_lidar_location_set; X_curr(1) X_curr(2)];
 
 %=================================
 %   update radar
@@ -135,27 +132,35 @@ kf_lidar_location_set = [kf_lidar_location_set; X_curr(1) X_curr(2)];
 
 %refine current
 
-% px = X_next(1);
-% py = X_next(2);
-% vx = X_next(3);
-% vy = X_next(4);
-% H_radar_jacobian = [px/(sqrt(px*px+py*py)) py/(sqrt(px*px+py*py)) 0 0
-%                     -py/(px*px+py*py) -px/(px*px+py*py) 0 0
-%                     py*(vx*py-vy*px)/((px*px+py*py)*sqrt(px*px+py*py)) px*(vy*px-vx*py)/((px*px+py*py)*sqrt(px*px+py*py)) px/(sqrt(px*px+py*py)) py/(sqrt(px*px+py*py))];
-%        
-% 
-% 
-% K_radar = P_next*(H_radar_jacobian')*inv(H_radar_jacobian*P_next*H_radar_jacobian' + R_radar);
-% X_curr = X_next + K_radar*(Z_radar - H_radar_jacobian*X_next);
-% P_curr = (eye(4)-K_radar*H_radar_jacobian)*P_next;
-% 
-% %predict
-% X_next = F*X_curr
-% P_next = F*P_curr*F'+Q;
+px = X_next(1);
+py = X_next(2);
+vx = X_next(3);
+vy = X_next(4);
+H_radar_jacobian = [px/(sqrt(px*px+py*py)) py/(sqrt(px*px+py*py)) 0 0
+                    -py/(px*px+py*py) px/(px*px+py*py) 0 0
+                    py*(vx*py-vy*px)/((px*px+py*py)*sqrt(px*px+py*py)) px*(vy*px-vx*py)/((px*px+py*py)*sqrt(px*px+py*py)) px/(sqrt(px*px+py*py)) py/(sqrt(px*px+py*py))];
+       
+
+
+K_radar = P_next*(H_radar_jacobian')*inv(H_radar_jacobian*P_next*H_radar_jacobian' + R_radar);
 
 
 
 
+%X_curr = X_next + K_radar*(Z_radar - H_radar_jacobian*X_next);
+% Here, because of EKF, delta_Z = Z_radar-f(X_next)
+% rather than: Z_radar - H_radar_jacobian*X_next
+X_curr = X_next + K_radar*(Z_radar - radar_f(X_next));
+
+P_curr = (eye(4)-K_radar*H_radar_jacobian)*P_next;
+
+%predict
+X_next = F*X_curr
+P_next = F*P_curr*F'+Q;
+
+
+
+kf_lidar_location_set = [kf_lidar_location_set; X_curr(1) X_curr(2)];
 
 myRadarLocation_prev = radar_resp.location;
 end
@@ -164,10 +169,31 @@ end
 
 %draw
 figure(1)
+subplot(1,4,1)
 hold on;
 scatter(lidar_location_set(:,1),lidar_location_set(:,2),'r.');
-%scatter(radar_location_set(:,1),radar_location_set(:,2),'b.');
+scatter(radar_location_set(:,1),radar_location_set(:,2),'b.');
 scatter(kf_lidar_location_set(:,1),kf_lidar_location_set(:,2),'g.');
 scatter(true_location_set(:,1),true_location_set(:,2),'k.');
-legend('lidar','lidar-kf','groudtruth')
+legend('lidar','radar','lidar-kf','groudtruth')
 hold off;
+xlim([0,120])
+ylim([40,180])
+
+subplot(1,4,2)
+scatter(lidar_location_set(:,1),lidar_location_set(:,2),'r.');
+legend('lidar')
+xlim([0,120])
+ylim([40,180])
+
+subplot(1,4,3)
+scatter(radar_location_set(:,1),radar_location_set(:,2),'b.');
+legend('radar')
+xlim([0,120])
+ylim([40,180])
+
+subplot(1,4,4)
+scatter(kf_lidar_location_set(:,1),kf_lidar_location_set(:,2),'g.');
+legend('lidar-kf')
+xlim([0,120])
+ylim([40,180])
