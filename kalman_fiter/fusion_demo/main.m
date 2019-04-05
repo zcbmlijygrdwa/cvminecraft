@@ -6,12 +6,12 @@ myLocation.y = 0;
 myRadarLocation_prev = myLocation;
 
 lidar_noise_param.mu = 0;
-lidar_noise_param.sigma = 0.8;
+lidar_noise_param.sigma = 0.4;
 
 radar_noise_param.mu = 0;
-radar_noise_param.sigma = 0.1;
+radar_noise_param.sigma = 0.05;
 
-kalman_data
+
 
 
 sim_length = 100;
@@ -46,4 +46,5 @@ for i = 1:sim_length
     scatter(loc_data(i).radar_loc.x,loc_data(i).radar_loc.y,'b.');
     scatter(loc_data(i).true_loc.x, loc_data(i).true_loc.y,'k.');
 end
+legend('lidar','radar','groudtruth')
 hold off;
