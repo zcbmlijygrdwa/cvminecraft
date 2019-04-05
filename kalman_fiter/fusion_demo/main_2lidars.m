@@ -34,7 +34,7 @@ Q = [1/4 0 1/2 0
      1/2 0 1 0
      0 1/2 0 1];
  
- Q = eye(4,4)*0.01;
+ Q = eye(4,4)*0.00001;
 
 %noise covariance of the sensors
 R_lidar = [lidar_noise_param.sigma*lidar_noise_param.sigma 0
